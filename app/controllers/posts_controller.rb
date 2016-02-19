@@ -16,7 +16,6 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-     p "#{current_user.inspect}======#{current_user.class}"
     @post = current_user.posts.new
   end
 
