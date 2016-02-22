@@ -10,7 +10,11 @@
   <%= @post.description %>
 </p>
 
-
+<p>
+<%= @post.inspect %>
+<br>
+<%= @post.user.inspect %>
+</p>
 <p>
   <strong>User:</strong>
   <%= @post.user.email %>
