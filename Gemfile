@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'omniauth-facebook'
 
 #login via google
-gem "omniauth-google-oauth2"
+gem "omniauth-google-oauth2" 
 
 #multiple authentication
 gem 'domp', '~> 0.0.7'
@@ -58,4 +58,4 @@ end
 
 
 gem 'omniauth'
-gem 'omniauth-google-oauth2'
+#gem 'omniauth-google-oauth2'

@@ -8,5 +8,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       :image_size => 50
     }
 
-
+  #provider :facebook, '1696345830581755', 'a4e7450a2fe4b948629fcf28b71056f5'
 end
