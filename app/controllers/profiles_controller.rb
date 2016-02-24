@@ -5,6 +5,8 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profiles = current_user
+  p '-----------------------------scope --------------------------------'
+  p User.between current_user.id
   end
 
   # GET /profiles/1

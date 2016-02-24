@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
     create(attributes)
   end
 
+scope :between, -> (sender_id) do
+    where("(users.id = ? )", sender_id)
+  end
+
   has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
