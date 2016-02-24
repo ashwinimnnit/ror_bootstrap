@@ -14,18 +14,18 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-        :omniauthable, :omniauth_providers => [:google_oauth2]  ,:omniauth_providers => [:facebook]
+        :omniauthable,:omniauth_providers => [:google_oauth2,:facebook]  
   has_many :posts
 
 
-	#def self.from_omniauth(auth)
-  	#	where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    	#	user.email = auth.info.email
-    	#	user.password = Devise.friendly_token[0,20]
-    	#	user.firstname = auth.info.name   # assuming the user model has a name
+	def self.from_omniauth(auth)
+  		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    		user.email = auth.info.email
+    		user.password = Devise.friendly_token[0,20]
+    		user.firstname = auth.info.name   # assuming the user model has a name
                 #user.image = auth.info.image # assuming the user model has an image
-  	#	end
-	#end
+  		end
+	end
 
 
        def self.new_with_session(params, session)

@@ -8,6 +8,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     create
   end
 
+
+
   private
 
     def create
