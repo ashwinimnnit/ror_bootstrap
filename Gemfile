@@ -1,5 +1,13 @@
 source 'https://rubygems.org'
 
+#login via facebook 
+gem 'omniauth-facebook'
+
+#login via google
+gem "omniauth-google-oauth2"
+
+#multiple authentication
+gem 'domp', '~> 0.0.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -48,3 +56,6 @@ group :development do
   gem 'spring'
 end
 
+
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
