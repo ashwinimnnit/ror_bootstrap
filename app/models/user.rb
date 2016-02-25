@@ -1,12 +1,10 @@
 class User < ActiveRecord::Base
   def self.create_from_omniauth(params)
-    attributes = {
-      email: params['info']['email'],
-      firstname: params['info']['name'],
-      password: Devise.friendly_token
-    }
-
-    create(attributes)
+  @user =  User.new(email:  params['info']['email'], firstname: params['info']['name'],
+                     password:  Devise.friendly_token, confirmed_at: Time.now )
+  @user.skip_confirmation! #don't send confirmation email to the user while signup with external devise like facebook or gmail
+  @user.save
+  @user
   end
 
 
@@ -15,7 +13,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-        :omniauthable,:omniauth_providers => [:google_oauth2,:facebook]  
+         :omniauthable,:omniauth_providers => [:google_oauth2,:facebook]  
   has_many :posts
 
 
