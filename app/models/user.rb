@@ -9,14 +9,11 @@ class User < ActiveRecord::Base
     create(attributes)
   end
 
-scope :between, -> (sender_id) do
-    where("(users.id = ? )", sender_id)
-  end
 
   has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # :confirmable, :lockable, :timeoutable 
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
         :omniauthable,:omniauth_providers => [:google_oauth2,:facebook]  
   has_many :posts
