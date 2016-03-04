@@ -10,6 +10,11 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+   @profiles = current_user
+  end
+
+  def admin_add_members
+  puts "*******sfsf"
   end
 
   # GET /profiles/new
@@ -64,7 +69,9 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find(params[:id])
+    p "***************private mey=thod===========#{params.inspect}"
+      @profile = Profile.find_by_id(params[:id])
+#    p @profile.inspect
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

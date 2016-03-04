@@ -14,3 +14,38 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+ function RemoveUser(id) {
+  var confirmation = confirm("Are You sure to delete this member ?")
+     if (confirmation) {
+        $.ajax({
+        type: 'post',
+        url: '/check/to_delete_id',
+        data: { key: id },
+        success: function(data) {
+         // event on success
+        $('#'+id).remove();
+        }
+        });
+      }
+  }
+
+// script for facbebook authentication
+
+/*window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1696345830581755',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));*/
+
+  

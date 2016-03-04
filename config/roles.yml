@@ -1,0 +1,9 @@
+r1:
+  id: "1"
+  name:  "admin"
+
+r2: &default
+  id:  "2"
+  name: "normal user"
+
+ 

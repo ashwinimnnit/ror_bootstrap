@@ -9,8 +9,14 @@
 </head>
 <body>
 <p class="notice"><%= notice %></p>
- <p class="alert"><%= alert %></p>
+<p class="alert"><%= alert %></p>
+<div class="header">
+   <% if current_user.present? %>
+   <%= link_to "MY Profile" , profile_path(:id => current_user.id) %>
+   <% end %>
+   <a href="/about_us">About Us</a>
+   <a href="/contact_us">Contcat us</a>
+</div>
 <%= yield %>
-
 </body>
 </html>

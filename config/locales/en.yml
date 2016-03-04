@@ -21,3 +21,4 @@
 
 en:
   hello: "Hello world"
+  not_an_authorised: "You are not an authorises person to access this page" 

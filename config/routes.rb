@@ -1,16 +1,21 @@
 Rails.application.routes.draw do
-  resources :profiles
-  #devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } ,:controllers => { registrations: 'registrations' }
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' }
-  resources :posts
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-#  devise_scope :user do
- #   root to: "devise/sessions#new"
+
+ resources :profiles
+ devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' } 
+  #adding custom urls in deviose controller
+ #devise_scope :user do
+      #match 'admin/addmembers', to: 'registrations#admin_add_members' , :via => [:get, :post]
   #end
+  get 'admins/users', to: 'admins#list'
+  resources :users
+  resources :posts
+  resources :admins
+  post 'check/to_delete_id/' => 'admins#remove'
+  post 'admins/add_members' => 'admins#add_members'
+  get '/about_us' => 'aboutus#about_us' 
+  get '/contact_us' => 'aboutus#contact_us' 
   # You can have the root of your site routed with "root"
-   root 'profiles#index' 
-   #match 'pages/show/' => 'profiles#index', :as => :root , via: [:post]
+   root 'posts#index'
    # root 'devise/sessions#new '
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
