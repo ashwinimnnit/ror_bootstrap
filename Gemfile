@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
 
-#login via facebook 
+# login via facebook
 gem 'omniauth-facebook'
 
-#login via google
-gem "omniauth-google-oauth2" 
+# login via google
+gem 'omniauth-google-oauth2'
 
-#multiple authentication
+# multiple authentication
 gem 'domp', '~> 0.0.7'
 
+gem 'rubocop', '~> 0.37.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use postgresql as the database for Active Record
@@ -56,6 +57,5 @@ group :development do
   gem 'spring'
 end
 
-
 gem 'omniauth'
-#gem 'omniauth-google-oauth2'
+# gem 'omniauth-google-oauth2'

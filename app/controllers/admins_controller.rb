@@ -23,7 +23,7 @@ class AdminsController < ApplicationController
    elsif @role.present?
      @notice = "Roles has been assigned Successfully !!"
    end
-    redirect_to({ action: 'index' }, notice: "#{@notice}")
+   redirect_to({ action: 'index' }, notice: "#{@notice}")
  end
  
 #def show
@@ -34,9 +34,9 @@ class AdminsController < ApplicationController
   def add_members
     @user = User.from_admin params
      if @user.present?
-        redirect_to({ action: 'new' }, notice: "User has been created Successfully !!")
-      else
-        redirect_to({ action: 'new' })
+        redirect_to({ action: 'new' } , notice: "User has been created Successfully !!")
+       else
+        redirect_to ({ action: 'new'} )
       end 
   end
 
@@ -45,7 +45,7 @@ class AdminsController < ApplicationController
  end
 
  def get_users
- @user = User.get_user(params["term"])
+ @user = User.get_user(params['term'])
  respond_to do |format|
    format.json { render json: @user }  # respond with the created JSON object
    end
@@ -55,13 +55,12 @@ class AdminsController < ApplicationController
      User.bulk_edit @changed_date  if !(@changed_date = params["userchg"].to_a - params["userori"].to_a).empty?
     redirect_to({ action: 'list' })
   end
-  
+ 
  def remove
-  @user = User.find_by_id(params["key"])
-  @user.destroy 
+  @user = User.find_by_id(params['key'])
+  @user.destroy
   respond_to do |format|
-   format.json { render json: @user }  # respond with the created JSON object
+     format.json { render json: @user }  # respond with the created JSON object
    end
  end
-
 end
