@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+   @user = User.find_by_id(params[:id])
    @profiles = current_user
   end
 
@@ -42,6 +43,14 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def get_role
+   p params
+    if !@role.nil?
+     puts @role.class 
+    end
+   render :json => @role 
+  end
+
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
@@ -69,9 +78,7 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-    p "***************private mey=thod===========#{params.inspect}"
       @profile = Profile.find_by_id(params[:id])
-#    p @profile.inspect
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       #match 'admin/addmembers', to: 'registrations#admin_add_members' , :via => [:get, :post]
   #end
   get 'admins/users', to: 'admins#list'
+  match '/admins/role_userole' => 'admins#get_users', via: [:get,:post]
+ match '/role_userole' => 'admins#get_users', via: [:get,:post]
   resources :users
   resources :posts
   resources :admins
@@ -14,6 +16,9 @@ Rails.application.routes.draw do
   post 'admins/add_members' => 'admins#add_members'
   get '/about_us' => 'aboutus#about_us' 
   get '/contact_us' => 'aboutus#contact_us' 
+  post '/profiles/user/role/:id' => 'profiles#get_role'
+  match '/admin_assign_roles' => 'admins#admin_assign_roles' ,via: [:get,:post]
+  match '/update' => 'admins#bulk_user_update' ,via:[:post,:get]
   # You can have the root of your site routed with "root"
    root 'posts#index'
    # root 'devise/sessions#new '

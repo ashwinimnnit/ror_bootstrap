@@ -5,6 +5,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
+p "**********************googe via login*****************"
+p params.inspect
     create
   end
 

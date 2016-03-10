@@ -10,10 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+ //= require jquery
+ //= require jquery_ujs
+ //= require turbolinks
+  //=require_tree .
 
  function RemoveUser(id) {
   var confirmation = confirm("Are You sure to delete this member ?")
@@ -29,6 +29,32 @@
         });
       }
   }
+
+
+ function ForaAotucompleteFiled(availableTags){
+    $("#data-set").html('');
+    console.log (availableTags)
+     $(function() {
+       $( "#role_userole" ).autocomplete({
+       source: availableTags,
+       })
+       .autocomplete( "instance" )
+       ._renderItem = function( ul, item ){
+         return $( "<div>" )
+         .append( "<input type='checkbox' name= admin_rol[] value = " + item.id + " >" +
+         item.firstname + item.lastname + "(" + item.email + ")" + "</input>")
+         .appendTo( '#data-set' );
+       };
+     });
+  }
+
+ function EditUser() {
+  $(".usero").hide();
+  $(".usere").show();
+  $("#update-usr").show();
+  $("#userebuton").hide();
+  }
+
 
 // script for facbebook authentication
 

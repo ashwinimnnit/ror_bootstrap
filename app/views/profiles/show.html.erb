@@ -1,22 +1,24 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Welcome <%=@profiles.firstname %> &nbsp<%=@profiles.lastname %> </h1>
-<%= link_to "Sign Out" , destroy_user_session_path , :method => 'delete'%>
-<%= link_to "Edit Profile", edit_user_registration_path(:id => current_user.id) %>
-
 <% if current_user.admin? %>
 <%= render 'devise/registrations/admin' %>
 <% end %>
+<h1>Welcome <%=@profiles.firstname %> &nbsp<%=@profiles.lastname %> </h1>
 
 <p>
   <strong>Fname:</strong>
   <%= @profile.fname %>
 </p>
-
+<div class = "user-role" >
+<strong>Roles</strong> <%= display_roles  @user%>
+</div>
 <p>
   <strong>Lname:</strong>
   <%= @profile.lname %>
 </p>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
+
+<%= link_to 'Edit Profile', edit_profile_path(@profile) %> 
 <%= link_to 'Back', profiles_path %>
+<%= link_to "Edit Account", edit_user_registration_path(:id => current_user.id) %>
+<%= link_to "Sign Out" , destroy_user_session_path , :method => 'delete'%>
+

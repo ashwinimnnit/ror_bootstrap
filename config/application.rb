@@ -4,6 +4,7 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
+#config.assets.precompile += %w( jquery-ui.css )
 Bundler.require(*Rails.groups)
 
 module Talen

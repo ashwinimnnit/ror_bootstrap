@@ -4,7 +4,6 @@
   <title>Talen</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag  'boootstrap' %> 
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -14,8 +13,10 @@
    <% if current_user.present? %>
    <%= link_to "MY Profile" , profile_path(:id => current_user.id) %>
    <% end %>
+  <% if controller_name != 'sessions' %>
    <a href="/about_us">About Us</a>
    <a href="/contact_us">Contcat us</a>
+  <% end %>
 </div>
 <%= yield %>
 </body>

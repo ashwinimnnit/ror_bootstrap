@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :roles , dependent: :destroy
   after_create :set_profile
   
+  scope :get_user, -> (parameter) { where("firstname LIKE ?", "#{parameter}%") }
+  
   def self.create_from_omniauth(params)
     @user =  User.new(email:  params['info']['email'], firstname: params['info']['name'],
                      password:  Devise.friendly_token, confirmed_at: Time.now )
@@ -55,6 +57,12 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
      end
     end
+  end
+ 
+ #admin changes the user details 
+  def self.bulk_edit (data)
+     @updated = data.to_h
+     User.update(@updated.keys,@updated.values )
   end
 
 
