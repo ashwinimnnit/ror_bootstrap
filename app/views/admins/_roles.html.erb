@@ -1,7 +1,7 @@
 <br>
 Assign Role:<br />
 <div>
-     <% get_roles.values.each do |p| %>
+     <% display_roles.values.each do |p| %>
       <input type="checkbox"  value=<%=p["id"]%> name =user[roles][] > <%= p["name"]%> <br>
    <% end %>
 

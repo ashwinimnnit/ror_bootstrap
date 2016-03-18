@@ -10,10 +10,9 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-
 class RegistrationsController < Devise::RegistrationsController
- 
-private
+  # registration of new user by overriding native devise
+  private
 
   # override sign_up_params method
   def sign_up_params

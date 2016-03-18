@@ -15,63 +15,42 @@
  //= require turbolinks
   //=require_tree .
 
- function RemoveUser(id) {
-  var confirmation = confirm("Are You sure to delete this member ?")
-     if (confirmation) {
+  function RemoveUser(id){
+    var confirmation = confirm('Are You sure to delete this member ?')
+      if (confirmation){
         $.ajax({
-        type: 'post',
-        url: '/check/to_delete_id',
-        data: { key: id },
-        success: function(data) {
-         // event on success
-        $('#'+id).remove();
-        }
+          type: 'post',
+          url: '/check/to_delete_id',
+          data: { key: id },
+          success: function(data){
+            $('#'+id).remove();
+            console.log('#usere'+id)
+            $('#usere-'+id).remove();
+          }
         });
       }
   }
 
 
- function ForaAotucompleteFiled(availableTags){
-    $("#data-set").html('');
-    console.log (availableTags)
-     $(function() {
-       $( "#role_userole" ).autocomplete({
-       source: availableTags,
-       })
-       .autocomplete( "instance" )
-       ._renderItem = function( ul, item ){
-         return $( "<div>" )
-         .append( "<input type='checkbox' name= admin_rol[] value = " + item.id + " >" +
-         item.firstname + item.lastname + "(" + item.email + ")" + "</input>")
-         .appendTo( '#data-set' );
-       };
-     });
+  function ForaAotucompleteFiled(availableTags){
+    $('#data-set').html('');
+      $(function(){
+        $('#role_userole').autocomplete({
+        source: availableTags,
+        })
+        .autocomplete('instance')
+        ._renderItem = function( ul, item ){
+          return $('<div>')
+          .append( "<input type='checkbox' name= users[] value = " + item.id + '>' +
+          item.firstname + item.lastname + '(' + item.email + ')' + '</input>')
+          .appendTo( '#data-set' );
+        };
+      });
   }
 
- function EditUser() {
-  $(".usero").hide();
-  $(".usere").show();
-  $("#update-usr").show();
-  $("#userebuton").hide();
+  function EditUser(){
+    $('.usero').hide();
+    $('.usere').show();
+    $('#update-usr').show();
+    $('#userebuton').hide();
   }
-
-
-// script for facbebook authentication
-
-/*window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1696345830581755',
-      xfbml      : true,
-      version    : 'v2.5'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));*/
-
-  

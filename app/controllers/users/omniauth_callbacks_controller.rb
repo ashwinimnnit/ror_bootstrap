@@ -1,24 +1,36 @@
-class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+# Talentica - bootstrap project
+# Copyright   Ashwini Kumar
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+module Users
+  # for user authentication
+  class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    def facebook
+      create
+    end
 
-  def facebook
-    create
-  end
+    def google_oauth2
+      create
+    end
 
-  def google_oauth2
-p "**********************googe via login*****************"
-p params.inspect
-    create
-  end
-
-
-
-  private
+    private
 
     def create
-      auth_params = request.env["omniauth.auth"]
+      auth_params = request.env['omniauth.auth']
       provider = AuthenticationProvider.where(name: auth_params.provider).first
-      authentication = provider.user_authentications.where(uid: auth_params.uid).first
-      existing_user = current_user || User.where('email = ?', auth_params['info']['email']).first
+      authentication = provider.user_authentications
+                               .where(uid: auth_params.uid).first
+      existing_user = current_user ||
+                      User.where('email = ?', auth_params['info']['email'])
+                          .first
 
       if authentication
         sign_in_with_existing_authentication(authentication)
@@ -48,4 +60,5 @@ p params.inspect
         redirect_to new_user_registration_url
       end
     end
+  end
 end

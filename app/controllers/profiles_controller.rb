@@ -10,11 +10,9 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-
-
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
-  #before_action :authenticate_user!
+  # before_action :authenticate_user!
   # GET /profiles
   # GET /profiles.json
   def index
@@ -24,12 +22,11 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-   @user = User.find_by_id(params[:id])
-   @profiles = current_user
+    @user = User.find_by_id(params[:id])
+    @profiles = current_user
   end
 
   def admin_add_members
-  puts "*******sfsf"
   end
 
   # GET /profiles/new
@@ -45,24 +42,21 @@ class ProfilesController < ApplicationController
   # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
-
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        format.html do
+          redirect_to @profile, notice:
+          'Profile was successfully created.'
+        end
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @profile.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
-  end
-
-  def get_role
-   p params
-    if !@role.nil?
-     puts @role.class 
-    end
-   render :json => @role 
   end
 
   # PATCH/PUT /profiles/1
@@ -70,11 +64,17 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+        format.html do
+          redirect_to @profile,
+                      notice: 'Profile was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @profile }
       else
         format.html { render :edit }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @profile.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -84,19 +84,24 @@ class ProfilesController < ApplicationController
   def destroy
     @profile.destroy
     respond_to do |format|
-      format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
+      format.html do
+        redirect_to profiles_url, notice:
+                                 'Profile was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_profile
-      @profile = Profile.find_by_id(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def profile_params
-      params.require(:profile).permit(:fname, :lname)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_profile
+    @profile = Profile.find_by_id(params[:id])
+  end
+
+  # Never trust parameters from the scary internet,
+  # only allow the white list through.
+  def profile_params
+    params.require(:profile).permit(:fname, :lname)
+  end
 end
