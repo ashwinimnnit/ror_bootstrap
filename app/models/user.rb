@@ -13,6 +13,7 @@ require 'bcrypt'
 # GNU General Public License for more details.
 class User < ActiveRecord::Base
   include BCrypt
+  extend MyModules::OaouthImage
   has_many :authentications,
            class_name: 'UserAuthentication', dependent: :destroy
   # Include default devise modules. Others available are:
@@ -22,21 +23,42 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers:  [:google_oauth2, :facebook]
   has_one :profile, dependent: :destroy
   has_many :posts,  dependent: :destroy
-  has_many :roles, dependent: :destroy
+  has_many :roles
   after_create :set_profile
+  has_attached_file :avatar,
+                    styles: { medium: '300x300>', thumb: '50x50>' },
+                    default_url: '/images/no-image.png'
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
+  # before_save :extract_dimensions
   scope :listingUser, -> (param) { where('firstname LIKE ?', "#{param}%") }
 
+  scope :email_availibility, -> (param) { where('email = ?', param) }
+
   def self.create_from_omniauth(params)
+    p "================================================================================="
+    debugger
+    user_oaouth_image params.info.image if params.info.image
+    fname, lname = split_names params
     @user = User.new(email:  params['info']['email'],
-                     firstname: params['info']['name'],
-                     password:  Devise.friendly_token,
+                     firstname: fname,
+                     lastname: lname,
+                     avatar_file_name: params.info.image,
+                     password: params['info']['email'],
                      confirmed_at: Time.now)
     # don't send email to the user while signup with externa devise
     @user.skip_confirmation!
     @user.save
     @user.confirm!
     @user
+  end
+
+  def self.split_names(param)
+    if param['provider'] == 'facebook'
+      param['info']['name'].split(' ', 2)
+    elsif param['provider'] == 'google_oauth2'
+      [param['info']['first_name'], param['info']['last_name']]
+    end
   end
 
   # devise confirm! method overriden
@@ -83,6 +105,15 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  # def extract_dimensions
+  # return unless image?
+  # tempfile = avatar.queued_for_write[:medium]
+  # unless tempfile.nil?
+  # geometry = Paperclip::Geometry.from_file(tempfile)
+  # [geometry.width.to_i, geometry.height.to_i].join('x')
+  # end
+  # end
 
   # send welcome mails when user creates a new account
   def welcome_message

@@ -11,8 +11,8 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 class Post < ActiveRecord::Base
-  belongs_to :user
-
+ # belongs_to :user
+  belongs_to :role
   def self.user_posts(user)
     user.posts
   end

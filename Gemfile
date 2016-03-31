@@ -1,4 +1,17 @@
 source 'https://rubygems.org'
+# papaerclip for image upload
+gem 'paperclip', '~> 4.3'
+
+# paperclip dimesion of image
+
+gem 'paperclip-meta'
+
+# fatsimage that return image demension
+
+gem 'fastimage'
+
+# gem for file upload via ajax
+gem 'remotipart', '~> 1.2'
 
 # login via facebook
 gem 'omniauth-facebook'
@@ -41,11 +54,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-#Use devise for authentication
+# Use devise for authentication
 gem 'devise', '~> 3.5', '>= 3.5.6'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # Call 'byebug' anywhere in the code to stop
+  # execution and get a debugger console
   gem 'byebug'
 end
 
@@ -53,7 +67,8 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # Spring speeds up development by keeping your application
+  # running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
 

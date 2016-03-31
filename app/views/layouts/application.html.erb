@@ -9,13 +9,31 @@
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
+<% if controller_name != 'sessions' && controller_name != 'registrations' %>
 <div class="header">
-   <% if current_user.present? %>
-   <%= link_to "MY Profile" , profile_path(:id => current_user.id) %>
-   <% end %>
-  <% if controller_name != 'sessions' %>
-   <a href="/about_us">About Us</a>
-   <a href="/contact_us">Contcat us</a>
+  <% if controller_name != 'posts' && action_name != 'index' %>
+   <a href="/">Home</a>
+  <% end %>
+
+    <a href="/about_us">About Us</a>
+    <a href="/contact_us">Contcat us</a>
+    <%= link_to "Sign Out" , destroy_user_session_path , :method => 'delete'%>
+
+    <%= link_to 'Edit Profile', edit_profile_path(current_user.profile.id) %>
+    <%= link_to "Edit Account", edit_user_registration_path(:id => current_user.id) %>
+  
+    <% if current_user.admin %>
+       <%= link_to 'Adminstration', :controller => 'admins' , :action => 'index' %>
+    <% end %>
+
+  <% if controller_name != 'profiles' && action_name != 'show' %>
+     <div class = "profile_pic" >
+       <a href = "<%= profile_path(:id => current_user.profile.id) %>" class = "user-thumb-name">
+       <span class ="user-thumb-span" ><%=current_user.profile.fname %><%=current_user.profile.lname %></span>
+       <%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %>
+      </a>
+   </div
+  <% end %>
   <% end %>
 </div>
 <%= yield %>

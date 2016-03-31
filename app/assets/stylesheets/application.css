@@ -13,8 +13,8 @@
  *= require_tree .
  *= require_self
  */
- .header{padding: 5px 0 4px 2px;}
- .admin-add-member-role{width: 50% ;position: relative}
+ .header{background-color: #ecf0f1;height: 49px;padding: 11px 0 1px 17px}
+ .admin-add-member-role{border: 1px solid #c2c2c2;padding: 9px 22px 9px 18px;position: relative;width: 50%;  }
  .suggestion-data{height: 20px;left: 230px;position: relative;width: 50%;}
  ::-webkit-input-placeholder {text-align: center;}
 :-moz-placeholder { /* Firefox 18- */
@@ -28,7 +28,20 @@
 :-ms-input-placeholder {  
    text-align: center; 
 }
+#update_pic {background-color: #ecf0f1;left: 213px;margin-left: 641px;position: relative;top: -109px;width: 200px;
+padding: 19px 13px 23px 9px;}
+#change-picture{background-color: black;color: white;cursor: pointer; font-size: 15px; margin-left: 33px;padding: 2px 5px 3px 7px;position: relative;top: -37px;display:none;width: 147px; }
 #update-usr{display:none}
 .usere{ display:none}
-.suggestion-role{ left: 1020px;position: fixed;top: 145px;}
+.suggestion-role{background-color: #e7edf1; left: 1020px;padding: 10px 24px 25px 25px;position: fixed;top: 149px;}
 .usero input {border:none}
+.profile_pic{margin-left: 1050px; position: relative;top: -15px;}
+.user-details{position: relative;width: 100%;}
+/*.user-thumb{margin-left: -108px;position: relative;top: -16px;}*/
+.user-thumb-name{margin-left: -84px;position: relative;text-decoration: none;top: -2px;}
+.user-thumb-span { position: relative;top: -10px;}
+ .user-med-pic{ margin-left: 867px;position: relative; top:-133px} .user-profile{ position: relative;top: -133px;}
+.email-validation { background-color: #B30000;color :white;border-radius: 4px; padding: 7px;position: relative }
+.sub-roles {margin-left: 1025px; position: relative;top: 95px;}
+.user-med-pic:hover  #change-picture { display:block; }
+#dis-img {border:solid 1px #7c7c7c}

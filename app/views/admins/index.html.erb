@@ -4,13 +4,13 @@
 <%= javascript_include_tag 'http://code.jquery.com/ui/1.11.4/jquery-ui.js' %>
 <%= link_to 'Members' , :controller => 'admins' ,:action => 'list' %>
 <%= link_to 'Add Members' , :controller => 'admins' ,:action => 'new' %>
-<label for="male">Assign Roles:</label>  
-<%= text_field(:role, :userole, class: "admin-add-member-role" ,:placeholder => "search members") %>
+<label for="male">Assign Roles:</label> 
+ <%= text_field(:role, :userole, class: "admin-add-member-role" ,:placeholder => "search members") %>
 
-<%= form_tag ("/admin_assign_roles") do %>
+ <%= form_tag ("/admin_assign_roles") do %>
  <div id ="data-set" class = "suggestion-data" > </div>
  <div id ="role" class = "suggestion-role" > <%= render 'roles' %></div>
- <input type ="submit" value ="submit" />
+ <input type ="submit" value ="assign roles" class = "sub-roles" />
 <% end %>
 
 <%= javascript_tag  do -%>

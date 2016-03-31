@@ -1,24 +1,29 @@
 <p id="notice"><%= notice %></p>
-<% if current_user.admin? %>
-<%= render 'devise/registrations/admin' %>
-<% end %>
-<h1>Welcome <%=@profiles.firstname %> &nbsp<%=@profiles.lastname %> </h1>
-
-<p>
-  <strong>Fname:</strong>
-  <%= @profile.fname %>
-</p>
-<div class = "user-role" >
-<strong>Roles</strong> <%= display_user_roles  @user%>
+<div class = "user-details" >
+   <h1>Welcome <%=@profile.fname %> &nbsp<%=@profile.lname %> </h1>
+      <p>
+      <strong>Fname:</strong>
+      <%= @profile.fname %>
+     </p>
+    <strong>Roles</strong> <%= display_user_roles  @user%>
+     <p>
+      <strong>Lname:</strong>
+      <%= @profile.lname %>
+   </p>
 </div>
-<p>
-  <strong>Lname:</strong>
-  <%= @profile.lname %>
-</p>
+<%= form_for @user, 
+             url: { action: 'update_profile_image' },
+             remote:true, authenticity_token: true do |f| %>
+ <input type = 'hidden' name = 'user[attr]' value = "<%=@user.id%>" />
+<div class ="user-med-pic">
+     <%= image_tag current_user.avatar.url(:medium), id: 'dis-img' %>
+    <a id="change-picture" >Update profile picture</a>
+   </div>
 
-
-<%= link_to 'Edit Profile', edit_profile_path(@profile) %> 
-<%= link_to 'Back', profiles_path %>
-<%= link_to "Edit Account", edit_user_registration_path(:id => current_user.id) %>
-<%= link_to "Sign Out" , destroy_user_session_path , :method => 'delete'%>
+    <div style = "display:none" id = "update_pic" >
+    <%= render partial: 'devise/registrations/image_upload' , locals: { f: f } %>
+    <input type = "button" value ="Update" id= "update-img" 
+      onclick ="AjaxUpdateImage($('form').attr('action'), $('form').attr('id'))" />
+    </div>
+<% end %>
 

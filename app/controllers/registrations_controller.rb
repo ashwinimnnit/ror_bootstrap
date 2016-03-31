@@ -12,13 +12,29 @@
 # GNU General Public License for more details.
 class RegistrationsController < Devise::RegistrationsController
   # registration of new user by overriding native devise
+  before_filter :authenticate_user!, except: [:user_email_availability]
+
+  def user_email
+    @response = User.email_availibility params['email']
+    respond_to do |format|
+      format.json { render json: @response }
+    end
+  end
+
+  protected
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
+
   private
 
   # override sign_up_params method
   def sign_up_params
     params.require(:user).permit(:firstname, :lastname,
                                  :email, :password,
-                                 :password_confirmation)
+                                 :password_confirmation,
+                                 :avatar)
   end
 
   # override sign_up_params method

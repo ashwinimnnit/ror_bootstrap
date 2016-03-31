@@ -12,6 +12,7 @@
 # GNU General Public License for more details.
 class Role < ActiveRecord::Base
   belongs_to :user
+  has_many :posts
   validates :user_id, uniqueness: { scope: :user_role }
 
   def self.assignment_roles(user, roles)

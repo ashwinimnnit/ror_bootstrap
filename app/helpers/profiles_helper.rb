@@ -14,7 +14,7 @@ module ProfilesHelper
   def display_user_roles(user)
     s = []
     user.roles.each do |r|
-      s << r['userole']
+      s << r['user_role']
     end
     get_roles_name s
   end

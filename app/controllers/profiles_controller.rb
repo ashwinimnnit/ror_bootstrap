@@ -22,8 +22,6 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    @user = User.find_by_id(params[:id])
-    @profiles = current_user
   end
 
   def admin_add_members
@@ -38,8 +36,17 @@ class ProfilesController < ApplicationController
   def edit
   end
 
+  def update_profile_image
+    id = params[:user][:attr].to_i
+    @user = User.find(id)
+    @response = @user.update_attribute(:avatar, params[:user][:avatar])
+    respond_to do |format|
+      format.json { render json: @response }
+    end
+  end
   # POST /profiles
   # POST /profiles.json
+
   def create
     @profile = Profile.new(profile_params)
     respond_to do |format|
@@ -97,6 +104,7 @@ class ProfilesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_profile
     @profile = Profile.find_by_id(params[:id])
+    @user = User.find_by_id(@profile.user_id)
   end
 
   # Never trust parameters from the scary internet,

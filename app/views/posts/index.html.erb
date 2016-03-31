@@ -2,6 +2,11 @@
 
 <h1>Home page </h1>
 <p> Welcome <%= current_user.firstname%> </p>
+
+<% #image_tag current_user.avatar.url %>
+<%#= image_tag current_user.avatar.url(:medium) %>
+<% # image_tag current_user.avatar.url(:thumb) %>
+
 <table>
   <thead>
     <tr>

@@ -14,6 +14,8 @@ class AboutusController < ApplicationController
   layout false
 
   def about_us
+   p '=============================='
+   p params
   end
 
   def contact_us
