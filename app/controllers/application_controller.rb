@@ -26,4 +26,13 @@ class ApplicationController < ActionController::Base
       message: "You are not an authorised person to access this page"
     }
   end
+
+  def push_notification(channel, block)
+    p "================================="
+    p channel
+    p block
+    message = { channel: channel, data: block }
+    uri = URI.parse("http://localhost:9292/faye")
+    Net::HTTP.post_form(uri, message: message.to_json)
+  end
 end

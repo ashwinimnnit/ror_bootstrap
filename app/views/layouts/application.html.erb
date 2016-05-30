@@ -62,10 +62,19 @@
              </li>                 
             <li><a href="/about_us">About Us</a></li>
             <li> <a href="/contact_us">Contcat us</a></li>
-           <li style ="margin-left:380px"> 
+   
+             <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Send Request</a>
+                    <ul class="dropdown-menu">
+                       <% users.each do |f| %>
+                       <li class = "notify"> <a href ="/message/<%=f.id %>"><%=f.firstname %> <%= f.lastname %></a> </li>
+                       <% end %>                  
+                   </ul>
+               </li>
+           <li class = "header-profile"> 
              <a href = "<%= profile_path(:id => current_user.profile.id) %>" class = "user-thumb-name">
                <span class ="user-thumb-span" > Hi <%=current_user.profile.fname %><%=current_user.profile.lname %></span>
-               <%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %>
+               <div class ="header-img"><%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %></div>
             </a>
           </li>
 

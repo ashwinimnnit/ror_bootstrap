@@ -88,12 +88,17 @@ $( document ).on('page:change',(function() {
         }
      });
 
-     $('#message_post').keypress(function (e) {
+     /*$('#message_post').keypress(function (e) {
       if (e.which == 13) 
       {
        $('form#chat-room').submit();
        return false;   
       }
+    });*/
+
+    $(".notify").click(function(event) {
+     event.preventDefault();
+     API.SendRequest($(this).find("a").attr("href"))                
     });
 
   }));

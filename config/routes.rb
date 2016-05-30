@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   root "profiles#index"
   get "/admins/add_members", to: "admins#add_members"
   post "/profiles/getuser/image", to: "profiles#fb_image"
-  post "/message/:id", to: "profiles#message"
+  post "/message", to: "profiles#message"
+  get "/message/:id", to: "profiles#message"
   get "/chatroom",  to: "profiles#chat_api"
 end

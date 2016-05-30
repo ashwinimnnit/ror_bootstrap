@@ -28,7 +28,15 @@ var API =  (function()
        $('#'+data).remove();
        $('#usere-'+data).remove();
       });
-      }
+      },
+ 
+   SendRequest: function(uri)
+   {
+     data = "$('.user-thumb-name').append('<div class = bubble> 1 </div>')"
+     $.post("/message", { url: uri, data: data }, function(data){
+     console.log(data)
+     })
+   }
     
   }
  return UTILS;

@@ -33,8 +33,7 @@ class ProfilesController < ApplicationController
   end
 
   def message
-    @message = params["message"]
-    @message
+    push_notification(params[:url], params[:data])
   end
 
   # def live_streaming
