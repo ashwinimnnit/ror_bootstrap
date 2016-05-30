@@ -12,7 +12,7 @@
 # GNU General Public License for more details.
 class AdminsController < ApplicationController
   before_action :check_if_admin
-  # before_filter :new ,:only => [:add_members]
+  before_filter :new, only: [:add_members]
   # execute new before add_members
 
   # listing of all admin activites
@@ -25,24 +25,17 @@ class AdminsController < ApplicationController
   end
 
   def admin_assign_roles
-    if params.key?('users') && params.key?('user')
-      if params['user'].key?('roles')
-        @message = Role.bulk_assignment_roles params
-      end
+    if params.key?("users") && params.key?("roles")
+      @message = Role.bulk_assignment_roles params
     end
-    redirect_to(action: 'index')
+    redirect_to(action: "index")
   end
 
   # send parameters to user model to create a new user by admin
   def add_members
-    @response = User.from_admin params
-    if @response.is_a?(User)
-      redirect_to({ action: 'new' }, notice:
-                    'user created')
-    elsif @response.is_a?(ActiveRecord::RecordInvalid)
-      redirect_to({ action: 'new' }, notice:
-                   @response.record.errors)
-    end
+    @response = User.create_user params
+    flash[:success] = "User created" unless @response.id.nil?
+    render :new
   end
 
   def list
@@ -50,25 +43,25 @@ class AdminsController < ApplicationController
   end
 
   def users
-    @user = User.listingUser(params['term'])
+    @user = User.has_firstname_as(params["term"])
     respond_to do |format|
       format.json { render json: @user }
     end
   end
 
   def bulk_user_update
-    unless (@changed_date = params['userchg'].to_a -
-            params['userori'].to_a).empty?
+    unless (@changed_date = params["userchg"].to_a -
+            params["userori"].to_a).empty?
       User.bulk_edit @changed_date
     end
-    redirect_to(action: 'list')
+    redirect_to(action: "list")
   end
 
   def remove
-    @user = User.find_by_id(params['key'])
+    @user = User.find_by_email(params[:key])
     @user.destroy
     respond_to do |format|
-      format.json { render json: @user }
+      format.json { render json: @user.id }
     end
   end
 end

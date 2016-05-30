@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328131147) do
+ActiveRecord::Schema.define(version: 20160520093952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,47 @@ ActiveRecord::Schema.define(version: 20160328131147) do
   end
 
   add_index "authentication_providers", ["name"], name: "index_name_on_authentication_providers", using: :btree
+
+  create_table "author_books", force: :cascade do |t|
+    t.integer  "book_id"
+    t.integer  "author_id"
+    t.string   "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string   "name"
+    t.string   "biography"
+    t.integer  "age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "author_id"
+    t.integer  "publisher_id"
+    t.date     "published_on"
+    t.string   "edition"
+    t.string   "isbn"
+    t.integer  "price"
+    t.string   "category"
+    t.string   "book_condition"
+    t.string   "tag"
+    t.string   "image_path"
+    t.string   "sample_pages"
+    t.integer  "no_of_pages"
+    t.string   "binding_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "books", ["title", "author_id", "tag", "isbn"], name: "index_books_on_title_and_author_id_and_tag_and_isbn", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "subject"
@@ -43,10 +84,10 @@ ActiveRecord::Schema.define(version: 20160328131147) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_role"
+    t.integer  "user_role",  null: false
   end
 
   create_table "user_authentications", force: :cascade do |t|
@@ -89,10 +130,12 @@ ActiveRecord::Schema.define(version: 20160328131147) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.text     "avatar_meta"
+    t.string   "user_name"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["user_name"], name: "index_users_on_user_name", using: :btree
 
 end

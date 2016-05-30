@@ -11,11 +11,10 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 class AboutusController < ApplicationController
-  layout false
+  # layout false
+  skip_before_action :authenticate_user!
 
   def about_us
-   p '=============================='
-   p params
   end
 
   def contact_us

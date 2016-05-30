@@ -12,12 +12,18 @@
 # GNU General Public License for more details.
 module ApplicationHelper
   def get_roles_name(s = [])
-    arr = ''
+    arr = ""
     s.each do |sid|
       CONFIG.values.each do |i|
-        arr += "<div> #{i['name']} </div>" if i['id'].to_i == sid
+        arr += "<div> #{i['name']} </div>" if i["id"].to_i == sid
       end
     end
     arr.html_safe
+  end
+
+  def broadcast(channel, &block)
+    message = { channel: channel, data: capture(&block) }
+    uri = URI.parse("http://localhost:9292/faye")
+    Net::HTTP.post_form(uri, message: message.to_json)
   end
 end

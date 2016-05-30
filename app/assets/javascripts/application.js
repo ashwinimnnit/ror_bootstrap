@@ -12,25 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
 //=require_tree .
-
-  function RemoveUser(id){
-    var confirmation = confirm('Are You sure to delete this member ?')
-      if (confirmation){
-        $.ajax({
-          type: 'post',
-          url: '/check/to_delete_id',
-          data: { key: id },
-          success: function(data){
-            $('#'+id).remove();
-            console.log('#usere'+id)
-            $('#usere-'+id).remove();
-          }
-        });
-      }
-  }
-
 
   function ForaAotucompleteFiled(availableTags){
     $('#data-set').html('');
@@ -55,46 +39,9 @@
     $('#userebuton').hide();
   }
 
-    function CheckUserEmail(){
-      if (validateEmail()){
-        user_email = $( "#user_email" ).val()
-        $.post( "check_availability/email", { email: user_email },
-        function(data){
-          if (data.length){
-             if ($('#email-validation').length == 0){
-               node = "<span class = 'email-validation' id = 'email-validation'> Email Alerady Exist </span>"
-               $('#user_email').after(node);
-             }
-             return false
-          }
-          else{
-            $('#email-validation').remove()
-          }
-        });
-      }
-    }
-
-  function validateEmail(){
-    var x = $('#user_email').val();
-    var atpos = x.indexOf("@");
-    var dotpos = x.lastIndexOf(".");
-      if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-        return false;
-      }
-      else {
-        return true;
-      }
-  }
-
-  $( document ).on('page:change',(function() {
-    $("#change-picture").click(function() {
-     $("#update_pic").show()
-    });
-  }));
-
   function AjaxUpdateImage(url,id) {
       var dataToSend = new FormData($('#'+id)[0]);
-      var f = dataToSend.get('user[avatar]')
+      var image = dataToSend.get('user[avatar]')
       $.ajax({
            type: "POST",
            url: url,
@@ -102,25 +49,52 @@
            contentType: false, // Set content type to false as jQuery will tell the server its a query string request
            data: dataToSend, // serializes the form's elements.
            success: function(data){
-               display_image(f)
+               display_image(image,data)
            },
            error: function (data)
-           {
-                console.log(data)
+           {   
+               console.log (data)
            }
       })
   }
 
-  function display_image(input) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#dis-img')
-        .attr('src', e.target.result)
-        .width(225)
-        .height(300);
-      };
-      reader.readAsDataURL(input);
+  function display_image(input,data) {
+     if (data.flag == true)
+      {
+        VIEW.ChangeSrcAfterImageUpload(data) 
+      }
+    
+    else
+    {
+     alert (data.message)
+    }
   }
 
-  //$(document).on('page:change', function() { alert ('hiee world') })
+$( document ).on('page:change',(function() {
+
+    $("#change-picture").click(function() {
+     $("#update_pic").show()
+    });
+  
+    $(".edit_user #fb_up").click(function() {
+       API.UpdateUserImageFromFb()
+    });
+
+    $(".usero .del-usr.btn-link").click(function(e) 
+     {
+        var confirmation = confirm('Are You sure to delete this member ?')
+        if (confirmation) {
+          API.RemoveUser($(this).attr("value"))
+        }
+     });
+
+     $('#message_post').keypress(function (e) {
+      if (e.which == 13) 
+      {
+       $('form#chat-room').submit();
+       return false;   
+      }
+    });
+
+  }));
 

@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   def render_401
     render json: {
       status: 401,
-      message: 'You are not an authorised person to access this page'
+      message: "You are not an authorised person to access this page"
     }
   end
 end

@@ -6,4 +6,6 @@ r2: &default
   id:  "2"
   name: "normal user"
 
- 
+r3:
+  id: "3"
+  name: "visitor" 

@@ -24,12 +24,12 @@ module Users
     private
 
     def create
-      auth_params = request.env['omniauth.auth']
+      auth_params = request.env["omniauth.auth"]
       provider = AuthenticationProvider.where(name: auth_params.provider).first
       authentication = provider.user_authentications
                                .where(uid: auth_params.uid).first
       existing_user = current_user ||
-                      User.where('email = ?', auth_params['info']['email'])
+                      User.where("email = ?", auth_params["info"]["email"])
                           .first
 
       if authentication

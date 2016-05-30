@@ -3,7 +3,7 @@
 <%= javascript_include_tag 'http://code.jquery.com/jquery-1.10.2.js' %>
 <%= javascript_include_tag 'http://code.jquery.com/ui/1.11.4/jquery-ui.js' %>
 <%= link_to 'Members' , :controller => 'admins' ,:action => 'list' %>
-<%= link_to 'Add Members' , :controller => 'admins' ,:action => 'new' %>
+<%= link_to 'Add Members' , admins_add_members_path %>
 <label for="male">Assign Roles:</label> 
  <%= text_field(:role, :userole, class: "admin-add-member-role" ,:placeholder => "search members") %>
 

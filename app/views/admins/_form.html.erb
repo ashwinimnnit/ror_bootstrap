@@ -1,8 +1,13 @@
-<%= form_for @user , :url => url_for(:controller => 'admins', :action => 'add_members') do |f| %>
-  First name: <%= f.text_field :firstname %><br />
-  Last name : <%= f.text_field :lastname %><br />
-  Email :     <%= f.text_field :email %><br />
+<%= form_for @user , :url => url_for(:controller => 'admins', :action => 'add_members'),
+   html: { class: "admin-add-member" }  do |f| %>
+<% if  !@response.nil? &&  !@response.errors.full_messages.empty? %>
+<%= @response.errors.full_messages %><br>
+<% end %>
+<%= flash[:success] %><br>
+  First name: <%= f.text_field :firstname, class: "form-control"%><br />
+  Last name : <%= f.text_field :lastname, class: "form-control" %><br />
+  Email :     <%= f.text_field :email, class: "form-control" %><br />
 
 <%= render 'roles' %>
-  <%= f.submit  %>
+  <%= f.submit class: "btn btn-default"%>
 <% end %>

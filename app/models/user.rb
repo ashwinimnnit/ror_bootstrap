@@ -1,4 +1,4 @@
-require 'bcrypt'
+require "bcrypt"
 # Talentica - bootstrap project
 # Copyright   Ashwini Kumar
 #
@@ -13,9 +13,10 @@ require 'bcrypt'
 # GNU General Public License for more details.
 class User < ActiveRecord::Base
   include BCrypt
-  extend MyModules::OaouthImage
+  extend Utils::OauthImage
+  validates :firstname, :lastname, presence: true
   has_many :authentications,
-           class_name: 'UserAuthentication', dependent: :destroy
+           class_name: "UserAuthentication", dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -25,39 +26,38 @@ class User < ActiveRecord::Base
   has_many :posts,  dependent: :destroy
   has_many :roles
   after_create :set_profile
+  # paperclip image upload gem method
   has_attached_file :avatar,
-                    styles: { medium: '300x300>', thumb: '50x50>' },
-                    default_url: '/images/no-image.png'
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+                    styles: { medium: "300x300>", thumb: "50x50>" },
+                    path: "public/system/:class/:id/:style/:filename",
+                    url: "/system/:class/:id/:style/:basename.:extension",
+                    default_url: "/images/no-image.png"
 
+  validates_attachment_content_type :avatar, content_type: /\Aimage/
   # before_save :extract_dimensions
-  scope :listingUser, -> (param) { where('firstname LIKE ?', "#{param}%") }
+  scope :has_firstname_as, -> (param) { where("firstname LIKE ?", "#{param}%").limit(5) }
 
-  scope :email_availibility, -> (param) { where('email = ?', param) }
+  scope :has_email_as, -> (param) { where("email = ?", param) }
 
   def self.create_from_omniauth(params)
-    p "================================================================================="
-    debugger
-    user_oaouth_image params.info.image if params.info.image
     fname, lname = split_names params
-    @user = User.new(email:  params['info']['email'],
+    @user = User.new(email:  params["info"]["email"],
                      firstname: fname,
                      lastname: lname,
-                     avatar_file_name: params.info.image,
-                     password: params['info']['email'],
+                     avatar_file_name: "img.jpg",
+                     password: params["info"]["email"],
                      confirmed_at: Time.now)
-    # don't send email to the user while signup with externa devise
+    # don"t send email to the user while signup with externa devise
     @user.skip_confirmation!
     @user.save
-    @user.confirm!
     @user
   end
 
   def self.split_names(param)
-    if param['provider'] == 'facebook'
-      param['info']['name'].split(' ', 2)
-    elsif param['provider'] == 'google_oauth2'
-      [param['info']['first_name'], param['info']['last_name']]
+    if param["provider"] == "facebook"
+      param["info"]["name"].split(" ", 2)
+    elsif param["provider"] == "google_oauth2"
+      [param["info"]["first_name"], param["info"]["last_name"]]
     end
   end
 
@@ -68,29 +68,21 @@ class User < ActiveRecord::Base
   end
 
   # creating a user by admin
-  def self.from_admin(params)
-    user = User.new(email:  params['user']['email'],
-                    firstname: params['user']['firstname'],
-                    lastname: params['user']['lastname'],
-                    password: '12345678')
+  def self.create_user(params)
+    user = User.new(email:  params["user"]["email"],
+                    firstname: params["user"]["firstname"],
+                    lastname: params["user"]["lastname"],
+                    password: "12345678")
     user.skip_confirmation!
-    begin
-      user.save!
-    rescue ActiveRecord::RecordInvalid => invalid
-      user = invalid
-    end
-    begin
-   rescue ActiveRecord::RecordNotUnique => invalid
-     user = invalid
-   end
+    user.save
     user
   end
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      fb_data = session['devise.facebook_data']
-      data = fb_data['extra']['raw_info'] if fb_data
-      user.email = data['email'] if data && user.email.blank?
+      fb_data = session["devise.facebook_data"]
+      data = fb_data["extra"]["raw_info"] if fb_data
+      user.email = data["email"] if data && user.email.blank?
     end
   end
 
@@ -105,15 +97,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
-  # def extract_dimensions
-  # return unless image?
-  # tempfile = avatar.queued_for_write[:medium]
-  # unless tempfile.nil?
-  # geometry = Paperclip::Geometry.from_file(tempfile)
-  # [geometry.width.to_i, geometry.height.to_i].join('x')
-  # end
-  # end
 
   # send welcome mails when user creates a new account
   def welcome_message

@@ -3,7 +3,6 @@ class CreateProfiles < ActiveRecord::Migration
     create_table :profiles do |t|
       t.string :fname
       t.string :lname
-
       t.timestamps null: false
     end
   end

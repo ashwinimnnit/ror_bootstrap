@@ -11,6 +11,8 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 class ProfilesController < ApplicationController
+  # include ActionController::Live
+  include Utils::OauthImage
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   # before_action :authenticate_user!
   # GET /profiles
@@ -19,10 +21,30 @@ class ProfilesController < ApplicationController
     @profiles = current_user
   end
 
+  def chat_api
+    render json: {
+      user: current_user.id
+    }
+  end
   # GET /profiles/1
   # GET /profiles/1.json
+
   def show
   end
+
+  def message
+    @message = params["message"]
+    @message
+  end
+
+  # def live_streaming
+  #  10.times do
+  #    response.stream.write "This is a test Messagen"
+  #     response.stream.write "\n"
+  #   sleep 1
+  #  end
+  #  response.stream.close
+  # end
 
   def admin_add_members
   end
@@ -38,8 +60,15 @@ class ProfilesController < ApplicationController
 
   def update_profile_image
     id = params[:user][:attr].to_i
-    @user = User.find(id)
-    @response = @user.update_attribute(:avatar, params[:user][:avatar])
+    user = User.find(id)
+    attribute = { avatar: params[:user][:avatar] }
+    @response = user.update_attributes(attribute)
+    @response = {
+      flag: @response,
+      error: user.errors.full_messages,
+      user: user.id,
+      img: user.avatar_file_name
+    }
     respond_to do |format|
       format.json { render json: @response }
     end
@@ -53,7 +82,7 @@ class ProfilesController < ApplicationController
       if @profile.save
         format.html do
           redirect_to @profile, notice:
-          'Profile was successfully created.'
+          "Profile was successfully created."
         end
         format.json { render :show, status: :created, location: @profile }
       else
@@ -73,7 +102,7 @@ class ProfilesController < ApplicationController
       if @profile.update(profile_params)
         format.html do
           redirect_to @profile,
-                      notice: 'Profile was successfully updated.'
+                      notice: "Profile was successfully updated."
         end
         format.json { render :show, status: :ok, location: @profile }
       else
@@ -93,10 +122,18 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       format.html do
         redirect_to profiles_url, notice:
-                                 'Profile was successfully destroyed.'
+                                 "Profile was successfully destroyed."
       end
       format.json { head :no_content }
     end
+  end
+
+  def fb_image
+    @response = Profile.user_fb_image current_user if current_user
+    render json: {
+      user: @response.id,
+      img: "img.jpg"
+    }
   end
 
   private

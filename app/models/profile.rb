@@ -11,5 +11,18 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 class Profile < ActiveRecord::Base
+  extend Utils::OauthImage
   belongs_to :user
+  def self.user_fb_image(user)
+    info = UserAuthentication
+           .where("authentication_provider_id= 1 and user_id= ?", user.id)
+           .first
+    if info
+      uri = "https://graph.facebook.com/v2.5/#{info.uid}/picture?type=large&redirect=false"
+      facebook_api(uri, user)
+      user.avatar_file_name = "img.jpg"
+      user.save
+      user
+    end
+  end
 end

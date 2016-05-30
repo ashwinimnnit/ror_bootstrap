@@ -17,15 +17,16 @@ class UserAuthentication < ActiveRecord::Base
   serialize :params
 
   def self.create_from_omniauth(params, user, provider)
-    expires_at = params['credentials']['expires_at']
+    expires_at = params["credentials"]["expires_at"]
     token_expires_at = Time.at(expires_at).to_datetime if expires_at
     create(
       user: user,
       authentication_provider: provider,
-      uid: params['uid'],
-      token: params['credentials']['token'],
+      uid: params["uid"],
+      token: params["credentials"]["token"],
       token_expires_at: token_expires_at,
       params: params
     )
+    Profile.user_fb_image(user)
   end
 end

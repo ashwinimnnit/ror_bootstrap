@@ -22,26 +22,13 @@ class Role < ActiveRecord::Base
   end
 
   def self.bulk_assignment_roles(param)
-    roles_to_added = param['user']['roles'].map(&:to_i)
-    param['users'].each do |id|
-      user = User.find(id)
-      user_roles = user.roles.select('user_role').map(&:user_role)
-      user_roles_to_add = roles_to_added - user_roles
-      user_roles_to_add.each do |user_role|
-        Role.create!(user_id: id, user_role: user_role)
+    roles_to_added = param["roles"].map(&:to_i)
+    param["users"].map(&:to_i).each do |uid|
+      user = User.find_by_id(uid)
+      next unless user
+      roles_to_added.each do |new_role|
+        user.roles << Role.create(user_id: user.id, user_role: new_role)
       end
     end
   end
-
-  #    data['admin_rol'].each do |user|
-  #      data['user']['roles'].each do |rol|
-  #        @role = Role.new(user_id: user, userole: rol)
-  #        begin
-  #          @role.save!
-  #        rescue => @e
-  #        end
-  #      end
-  #    end
-  #    return @role, @e
-  #  end
 end

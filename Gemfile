@@ -3,10 +3,17 @@ source 'https://rubygems.org'
 gem 'paperclip', '~> 4.3'
 
 # paperclip dimesion of image
+gem 'puma'
 
 gem 'paperclip-meta'
 
 # fatsimage that return image demension
+gem 'faye'
+
+gem 'mini_magick'
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
 
 gem 'fastimage'
 
@@ -61,6 +68,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop
   # execution and get a debugger console
   gem 'byebug'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'factory_girl_rails'
 end
 
 group :development do

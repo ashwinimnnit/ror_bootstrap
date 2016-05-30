@@ -11,11 +11,28 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 class RegistrationsController < Devise::RegistrationsController
-  # registration of new user by overriding native devise
-  before_filter :authenticate_user!, except: [:user_email_availability]
+  before_filter :authenticate_user!
 
-  def user_email
-    @response = User.email_availibility params['email']
+  def email_found
+    {
+      available:   false,
+      message: "The Email id is already registered",
+      notice_class: "email_not_available"
+    }
+  end
+
+  def email_not_found
+    {
+      available: true,
+      message: "The Email id is available to use",
+      notice_class: "email_available"
+    }
+  end
+
+  def check_email_availabilty
+    sleep 5
+    @user = User.has_email_as params["email"]
+    @response = @user.present? ? email_found : email_not_found
     respond_to do |format|
       format.json { render json: @response }
     end
@@ -24,7 +41,20 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def update_resource(resource, params)
-    resource.update_without_password(params)
+    if verify_new_password?(params) && resource.valid_password?(params["password"])
+      resource.update_attributes(password: params["new_password"])
+    end
+    update_user_details(params, resource) if params["password"].empty?
+  end
+
+  def verify_new_password?(param)
+    param["new_password"] == param["confirm_password"]
+  end
+
+  def update_user_details(param, resource)
+    resource.update_attributes(firstname: param["firstname"],
+                               lastname: param["lastname"]
+                              )
   end
 
   private
@@ -34,13 +64,14 @@ class RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:firstname, :lastname,
                                  :email, :password,
                                  :password_confirmation,
-                                 :avatar)
+                                 :avatar, :user_name)
   end
 
   # override sign_up_params method
   def account_update_params
     params.require(:user).permit(:firstname, :lastname,
                                  :email, :password,
-                                 :password_confirmation, :current_password)
+                                 :password_confirmation, :current_password,
+                                 :new_password, :confirm_password)
   end
 end

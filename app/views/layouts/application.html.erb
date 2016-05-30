@@ -1,41 +1,107 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Talen</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<% if controller_name != 'sessions' && controller_name != 'registrations' %>
-<div class="header">
-  <% if controller_name != 'posts' && action_name != 'index' %>
-   <a href="/">Home</a>
-  <% end %>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Talen" %></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
 
-    <a href="/about_us">About Us</a>
-    <a href="/contact_us">Contcat us</a>
-    <%= link_to "Sign Out" , destroy_user_session_path , :method => 'delete'%>
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <!-- Size should be 144 x 144 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
 
-    <%= link_to 'Edit Profile', edit_profile_path(current_user.profile.id) %>
-    <%= link_to "Edit Account", edit_user_registration_path(:id => current_user.id) %>
-  
-    <% if current_user.admin %>
-       <%= link_to 'Adminstration', :controller => 'admins' , :action => 'index' %>
-    <% end %>
+    <!-- For iPhone with high-resolution Retina display: -->
+    <!-- Size should be 114 x 114 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
 
-  <% if controller_name != 'profiles' && action_name != 'show' %>
-     <div class = "profile_pic" >
-       <a href = "<%= profile_path(:id => current_user.profile.id) %>" class = "user-thumb-name">
-       <span class ="user-thumb-span" ><%=current_user.profile.fname %><%=current_user.profile.lname %></span>
-       <%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %>
-      </a>
-   </div
-  <% end %>
-  <% end %>
-</div>
-<%= yield %>
-</body>
+    <!-- For first- and second-generation iPad: -->
+    <!-- Size should be 72 x 72 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <!-- Size should be 57 x 57 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+
+    <!-- For all other devices -->
+    <!-- Size should be 32 x 32 pixels -->
+    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+
+    <%= javascript_include_tag "application", "http://localhost:9292/faye.js" %>
+     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Talen</a>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+          <ul class="nav navbar-nav">
+             <% if current_user && current_user.admin %>
+            <li><%= link_to 'Adminstration', :controller => 'admins' , :action => 'index' %></li>
+             <% end %>
+              <% if current_user %> 
+               <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">More Options<b class="caret"></b></a>
+                 <ul class="dropdown-menu">
+                   <li><%= link_to 'Edit Profile', edit_profile_path(current_user.profile.id) %></li>
+                   <li><%= link_to "Edit Account", edit_user_registration_path(:id => current_user.id) %></li>
+                   <li><%= link_to "Sign Out" , destroy_user_session_path , :method => 'delete'%></li>                    
+                </ul>
+             </li>                 
+            <li><a href="/about_us">About Us</a></li>
+            <li> <a href="/contact_us">Contcat us</a></li>
+           <li style ="margin-left:380px"> 
+             <a href = "<%= profile_path(:id => current_user.profile.id) %>" class = "user-thumb-name">
+               <span class ="user-thumb-span" > Hi <%=current_user.profile.fname %><%=current_user.profile.lname %></span>
+               <%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %>
+            </a>
+          </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+   <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">          
+        </div>
+     <% end %>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
+       <% if 1 == 2 %>
+        <div class="col-lg-3">
+          <div class="well sidebar-nav">
+            <h3>Sidebar</h3>
+            <ul class="nav nav-list">
+              <li class="nav-header">Sidebar</li>
+              <li><%= link_to "Link1", "/path1"  %></li>
+              <li><%= link_to "Link2", "/path2"  %></li>
+              <li><%= link_to "Link3", "/path3"  %></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+      <footer>
+        <p>&copy; Ployglot-Talentica 2016</p>
+      </footer>
+<% end %>
+    </div> <!-- /container -->
+
+  </body>
 </html>

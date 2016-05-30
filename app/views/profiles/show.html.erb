@@ -11,6 +11,7 @@
       <%= @profile.lname %>
    </p>
 </div>
+
 <%= form_for @user, 
              url: { action: 'update_profile_image' },
              remote:true, authenticity_token: true do |f| %>
@@ -24,6 +25,7 @@
     <%= render partial: 'devise/registrations/image_upload' , locals: { f: f } %>
     <input type = "button" value ="Update" id= "update-img" 
       onclick ="AjaxUpdateImage($('form').attr('action'), $('form').attr('id'))" />
+     <button type="button" class ="fb_up_pic" id = "fb_up" >Use my facebook image</button> 
     </div>
 <% end %>
 

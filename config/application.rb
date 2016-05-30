@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-
+require "net/http"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 # config.assets.precompile += %w( jquery-ui.css )
@@ -24,5 +24,8 @@ module Talen
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.generators do |g|
+      g.fixture_replacement :factory_girl
+    end
   end
 end

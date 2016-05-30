@@ -13,6 +13,35 @@
  *= require_tree .
  *= require_self
  */
+
+.m_chat {
+    background-color: #d9dfe3;
+    border-radius: 67px;
+    padding: 6px 26px 7px 22px;
+}
+
+
+.input-group { 
+    border-collapse: inherit;
+    border-radius: 50px;
+    margin-left: 164px;
+    position: relative;
+    width: 64%; 
+    }
+
+#message_display {height: 400px; background-color: #f1f1f1;
+    border: 1px solid #c2c2c2; width:30%;}
+
+#message_post { border: 1px solid #c2c2c2;
+    position: relative;
+    resize: none;
+    top: 87%;
+    width: 30%;  }
+#chat_header { background-color: #a4b4b5;
+    padding: 14px 0 11px 103px;
+    width: 30%;
+}
+
  .header{background-color: #ecf0f1;height: 49px;padding: 11px 0 1px 17px}
  .admin-add-member-role{border: 1px solid #c2c2c2;padding: 9px 22px 9px 18px;position: relative;width: 50%;  }
  .suggestion-data{height: 20px;left: 230px;position: relative;width: 50%;}
@@ -28,20 +57,39 @@
 :-ms-input-placeholder {  
    text-align: center; 
 }
-#update_pic {background-color: #ecf0f1;left: 213px;margin-left: 641px;position: relative;top: -109px;width: 200px;
+.admin-add-member .form-control { width:40% }
+input { border: 1px solid #c2c2c2; height: 29px; padding: 3px 11px 5px 8px;}
+#update_pic {background-color: #ecf0f1;left: 213px;margin-left: 558px;position: relative;top: -109px;width: 200px;
 padding: 19px 13px 23px 9px;}
 #change-picture{background-color: black;color: white;cursor: pointer; font-size: 15px; margin-left: 33px;padding: 2px 5px 3px 7px;position: relative;top: -37px;display:none;width: 147px; }
 #update-usr{display:none}
 .usere{ display:none}
-.suggestion-role{background-color: #e7edf1; left: 1020px;padding: 10px 24px 25px 25px;position: fixed;top: 149px;}
+.suggestion-role{background-color: #e7edf1; left: 919px;padding: 10px 24px 25px 25px;position: fixed;top: 149px;}
 .usero input {border:none}
-.profile_pic{margin-left: 1050px; position: relative;top: -15px;}
+.profile_pic{margin-left: 1010px; position: relative;top: -15px;}
 .user-details{position: relative;width: 100%;}
 /*.user-thumb{margin-left: -108px;position: relative;top: -16px;}*/
 .user-thumb-name{margin-left: -84px;position: relative;text-decoration: none;top: -2px;}
 .user-thumb-span { position: relative;top: -10px;}
- .user-med-pic{ margin-left: 867px;position: relative; top:-133px} .user-profile{ position: relative;top: -133px;}
-.email-validation { background-color: #B30000;color :white;border-radius: 4px; padding: 7px;position: relative }
-.sub-roles {margin-left: 1025px; position: relative;top: 95px;}
+ .user-med-pic{ margin-left: 780px;position: relative; top:-133px} .user-profile{ position: relative;top: -133px;}
+#email_not_available { background-color: #B30000;color :white;border-radius: 4px; padding: 7px;position: relative }
+.sub-roles {margin-left: 909px; position: relative;top: 77px;}
 .user-med-pic:hover  #change-picture { display:block; }
 #dis-img {border:solid 1px #7c7c7c}
+.new_user #user_email{ width:381px;margin-left:102px }
+.new_user #user_password { width : 381px;margin-left:74px }
+.new_user #user_password_confirmation { width :381px; margin-left:20px}
+.new_user #user_firstname { margin-left :101px;width:198px }
+.new_user #commit { margin-left :360px }
+.new_user #user_avatar { margin-left :10px;display: inline;}
+input[type='file'] { color:transparent;border: none !important;   }
+.required label:after {color: red; content:" *"; }
+.new_user input { border: 1px solid #c2c2c2; height: 29px; padding: 3px 11px 5px 8px;}
+.new_user { background-color: #f6f6f6;padding: 50px 0 6px 139px;}
+.btn-default.login {background-color: #cacaca;border-color: #cccccc;color: #525252;height: 10px;padding: 11px 35px 12px 29px;
+ text-decoration: none; }
+.error {color : #b30000 }
+.new_user input.error {border:1px solid #b30000;}
+#email_available { background-color: green;color :white;border-radius: 4px; padding: 7px;position: relative }
+.forgot_pass .new_user input[type="submit"] { margin-left: 208px;margin-top: 28px; }
+
