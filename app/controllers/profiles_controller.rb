@@ -36,15 +36,6 @@ class ProfilesController < ApplicationController
     push_notification(params[:url], params[:data])
   end
 
-  # def live_streaming
-  #  10.times do
-  #    response.stream.write "This is a test Messagen"
-  #     response.stream.write "\n"
-  #   sleep 1
-  #  end
-  #  response.stream.close
-  # end
-
   def admin_add_members
   end
 

@@ -17,13 +17,11 @@ class CreateBooks < ActiveRecord::Migration
       t.integer :no_of_pages
       t.string :binding_type
       t.timestamps null: false
-      t.index [:title,:author_id,:tag, :isbn]
+      t.index [:title, :author_id, :tag, :isbn]
     end
   end
 
-  def down 
+  def down
     drop_table :books
   end
-  
-#  add_index :books, [:title,:author_id,:tag, :isbn]
 end

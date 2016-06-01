@@ -96,10 +96,10 @@ $( document ).on('page:change',(function() {
       }
     });*/
 
-    $(".notify").click(function(event) {
+    /*$(".notify").click(function(event) {
      event.preventDefault();
      API.SendRequest($(this).find("a").attr("href"))                
-    });
+    });*/
 
   }));
 

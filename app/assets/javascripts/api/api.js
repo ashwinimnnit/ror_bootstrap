@@ -32,7 +32,7 @@ var API =  (function()
  
    SendRequest: function(uri)
    {
-     data = "$('.user-thumb-name').append('<div class = bubble> 1 </div>')"
+     data = "Some"
      $.post("/message", { url: uri, data: data }, function(data){
      console.log(data)
      })

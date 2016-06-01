@@ -36,5 +36,6 @@ Rails.application.routes.draw do
   post "/profiles/getuser/image", to: "profiles#fb_image"
   post "/message", to: "profiles#message"
   get "/message/:id", to: "profiles#message"
-  get "/chatroom",  to: "profiles#chat_api"
+  get "/chatroom", to: "profiles#chat_api"
+  # post "/pull_message", to: "application#pull_message"
 end

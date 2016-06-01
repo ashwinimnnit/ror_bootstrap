@@ -73,6 +73,11 @@
                </li>
            <li class = "header-profile"> 
              <a href = "<%= profile_path(:id => current_user.profile.id) %>" class = "user-thumb-name">
+                <% @notifications = show_user_unread_notification(current_user.id) 
+                   display = @notifications > 0 ? "bubble" : "bubble hide "
+                %>
+                <div class = "<%=display%>"><%=@notifications %></div>
+                 <img class="user-thumb" src="/images/notification.jpg" >
                <span class ="user-thumb-span" > Hi <%=current_user.profile.fname %><%=current_user.profile.lname %></span>
                <div class ="header-img"><%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %></div>
             </a>

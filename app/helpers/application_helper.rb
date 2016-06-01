@@ -30,4 +30,8 @@ module ApplicationHelper
   def users
     User.all.to_a
   end
+
+  def show_user_unread_notification(user)
+    Notification.where("status = false AND user_id = #{user}").count
+  end
 end

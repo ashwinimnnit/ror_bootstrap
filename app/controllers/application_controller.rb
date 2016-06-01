@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :authenticate_user!
-
+  include ApplicationHelper
   def check_if_admin
     render_401 unless current_user.admin
   end
@@ -27,12 +27,29 @@ class ApplicationController < ActionController::Base
     }
   end
 
-  def push_notification(channel, block)
-    p "================================="
-    p channel
-    p block
-    message = { channel: channel, data: block }
-    uri = URI.parse("http://localhost:9292/faye")
-    Net::HTTP.post_form(uri, message: message.to_json)
+  def push_notification(channel, notification)
+    # used so that valid entry is saved in notifications
+    user = validate_user_from_channel channel
+    if user
+      Notification.call_hook_before_publish(user, notification, channel)
+      notification = show_user_unread_notification user.id
+      message = { channel: channel, data: notification }
+      uri = URI.parse("http://localhost:9292/faye")
+      Net::HTTP.post_form(uri, message: message.to_json)
+    else
+      logger.info("User doesn't exist for channel: #{channel}")
+    end
   end
+
+  def validate_user_from_channel(channel)
+    id = channel.split("/")[2].to_i
+    User.find_by_id(id)
+  end
+
+  # def pull_message
+  #  uid = params[:uid]
+  #  render json: {
+  #    notification: show_user_unread_notification(uid)
+  #  }
+  # end
 end
