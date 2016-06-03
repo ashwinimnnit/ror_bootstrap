@@ -42,7 +42,7 @@ class PostsController < ApplicationController
       if @post.save
         format.html do
           redirect_to @post, notice:
-                            'Post was successfully created.'
+                            "Post was successfully created."
         end
         format.json { render :show, status: :created, location: @post }
       else
@@ -66,7 +66,7 @@ class PostsController < ApplicationController
       if @post.update(post_params)
         format.html do
           redirect_to @post, notice:
-                            'Post was successfully updated.'
+                            "Post was successfully updated."
         end
         format.json { render :show, status: :ok, location: @post }
       else
@@ -86,7 +86,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html do
         redirect_to posts_url, notice:
-                              'Post was successfully destroyed.'
+                              "Post was successfully destroyed."
       end
       format.json { head :no_content }
     end

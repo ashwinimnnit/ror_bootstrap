@@ -23,6 +23,13 @@
 .hide {
     display: none
 }
+
+.show {
+  display: block
+}
+
+.foot{
+}
 .bubble{
 background: #e02424 none repeat scroll 0 0;
     border-radius: 3px;
@@ -33,6 +40,22 @@ background: #e02424 none repeat scroll 0 0;
     right: 132px;
     top: 6px;
 
+}
+#chat-room {
+max-width: 26%;
+margin-left :70%
+}
+
+.well
+{
+background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    height: 87% !important;
+    margin-left: 78%;
+    padding: 23px;
+    width: 30%;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0)
   and (min-resolution:.001dpcm) {
@@ -57,16 +80,16 @@ background: #e02424 none repeat scroll 0 0;
     }
 
 #message_display {height: 400px; background-color: #f1f1f1;
-    border: 1px solid #c2c2c2; width:30%;}
+    border: 1px solid #c2c2c2; width:100%;}
 
-#message_post { border: 1px solid #c2c2c2;
+.message_post { border: 1px solid #c2c2c2;
     position: relative;
     resize: none;
     top: 87%;
-    width: 30%;  }
+    width: 100%;  }
 #chat_header { background-color: #a4b4b5;
     padding: 14px 0 11px 103px;
-    width: 30%;
+    width: 100%;
 }
 
  .header{background-color: #ecf0f1;height: 49px;padding: 11px 0 1px 17px}

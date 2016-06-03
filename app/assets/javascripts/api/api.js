@@ -30,11 +30,9 @@ var API =  (function()
       });
       },
  
-   SendRequest: function(uri)
-   {
-     data = "Some"
-     $.post("/message", { url: uri, data: data }, function(data){
-     console.log(data)
+   SendRequest: function(uri, data = "some default data")
+   { 
+     $.post("/notifications", { url: uri, data: data }, function(data){
      })
    }
     

@@ -7,6 +7,8 @@ gem 'puma'
 
 gem 'paperclip-meta'
 
+gem 'eventmachine'
+
 # fatsimage that return image demension
 gem 'faye'
 

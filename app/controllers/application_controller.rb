@@ -29,27 +29,26 @@ class ApplicationController < ActionController::Base
 
   def push_notification(channel, notification)
     # used so that valid entry is saved in notifications
-    user = validate_user_from_channel channel
+    channel_prefix, user = validate_user_from_channel channel
     if user
-      Notification.call_hook_before_publish(user, notification, channel)
-      notification = show_user_unread_notification user.id
-      message = { channel: channel, data: notification }
-      uri = URI.parse("http://localhost:9292/faye")
-      Net::HTTP.post_form(uri, message: message.to_json)
+      channel_prefix.camelize
+                    .constantize
+                    .call_hook_before_publish(user, notification, channel)
+      notification = show_user_unread_notification user.id if channel_prefix == "notification"
+      push_on_channel(channel, notification)
     else
       logger.info("User doesn't exist for channel: #{channel}")
     end
   end
 
   def validate_user_from_channel(channel)
-    id = channel.split("/")[2].to_i
-    User.find_by_id(id)
+    arr = channel.split("/")
+    [arr[1], User.find_by_id(arr[2].to_i)]
   end
 
-  # def pull_message
-  #  uid = params[:uid]
-  #  render json: {
-  #    notification: show_user_unread_notification(uid)
-  #  }
-  # end
+  def push_on_channel(channel, notification)
+    message = { channel: channel, data: notification }
+    uri = URI.parse("http://localhost:9292/faye")
+    Net::HTTP.post_form(uri, message: message.to_json)
+  end
 end

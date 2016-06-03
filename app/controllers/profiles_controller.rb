@@ -32,8 +32,9 @@ class ProfilesController < ApplicationController
   def show
   end
 
-  def message
+  def send_notifications
     push_notification(params[:url], params[:data])
+    render nothing: true
   end
 
   def admin_add_members

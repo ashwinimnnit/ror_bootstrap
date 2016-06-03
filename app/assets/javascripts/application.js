@@ -88,18 +88,20 @@ $( document ).on('page:change',(function() {
         }
      });
 
-     /*$('#message_post').keypress(function (e) {
-      if (e.which == 13) 
-      {
-       $('form#chat-room').submit();
-       return false;   
-      }
-    });*/
-
-    /*$(".notify").click(function(event) {
+    $(".messages-chat").click(function(event) {
      event.preventDefault();
-     API.SendRequest($(this).find("a").attr("href"))                
-    });*/
+     node = VIEW.GetHtmlOfChatBox($(this))
+    console.log(node)
+     //node = "<div id='chat-room'><div id='chat_header'>Chat </div><div id='message_display'>  </div><textarea cols='50' name='message' class='message_post' channel = "+$(this).attr('href')+"> </textarea></div>"
+     $("#chat-room").addClass('show')
+     $(".foot").append(node)
+    });
+
+   $(document).on('keypress', '.message_post', function(e){
+    if (e.which == 13) { 
+     API.SendRequest($(this).attr('channel'), $(this).val() )
+     }
+ });
 
   }));
 

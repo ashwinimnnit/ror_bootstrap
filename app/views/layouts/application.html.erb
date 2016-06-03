@@ -67,7 +67,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Send Request</a>
                     <ul class="dropdown-menu">
                        <% users.each do |f| %>
-                       <li class = "notify"> <a href ="/message/<%=f.id %>"><%=f.firstname %> <%= f.lastname %></a> </li>
+                       <li class = "notify"> <a href ="/notification/<%=f.id %>"><%=f.firstname %> <%= f.lastname %></a> </li>
                        <% end %>                  
                    </ul>
                </li>
@@ -77,7 +77,7 @@
                    display = @notifications > 0 ? "bubble" : "bubble hide "
                 %>
                 <div class = "<%=display%>"><%=@notifications %></div>
-                 <img class="user-thumb" src="/images/notification.jpg" >
+                 <img class="user-thumb t" src="/images/notification.jpg" >
                <span class ="user-thumb-span" > Hi <%=current_user.profile.fname %><%=current_user.profile.lname %></span>
                <div class ="header-img"><%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %></div>
             </a>
@@ -98,24 +98,20 @@
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
-       <% if 1 == 2 %>
         <div class="col-lg-3">
           <div class="well sidebar-nav">
-            <h3>Sidebar</h3>
+            <h3>Chat list</h3>
+             <% users.each do |f| %>
+             <li> <a href ="/message/<%=f.id %>" class = "messages-chat"><%=f.firstname %> <%= f.lastname %></a> </li>
+             <% end %>
             <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
+              <fotter > 
           </div><!--/.well -->
         </div><!--/span-->
       </div><!--/row-->
-      <footer>
-        <p>&copy; Ployglot-Talentica 2016</p>
-      </footer>
-<% end %>
     </div> <!-- /container -->
-
+   <div class = "foot">
+   </div>
   </body>
 </html>
