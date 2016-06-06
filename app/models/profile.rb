@@ -20,9 +20,12 @@ class Profile < ActiveRecord::Base
     if info
       uri = "https://graph.facebook.com/v2.5/#{info.uid}/picture?type=large&redirect=false"
       facebook_api(uri, user)
-      user.avatar_file_name = "img.jpg"
-      user.save
+      user.update_attribute(:avatar_file_name, "img.jpg")
       user
+    else
+      render json: {
+        message: "User need to be logged-in via fabebook"
+      }
     end
   end
 end
