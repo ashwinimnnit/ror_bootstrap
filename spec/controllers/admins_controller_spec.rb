@@ -26,7 +26,7 @@ RSpec.describe AdminsController, type: :controller do
     end
   end
 
-  describe "GET #index in login mode non admin user", user_activity: true do
+  describe "GET #index non admin user access admin page", user_activity: true do
     let(:expected_response) { JSON.parse(response.body)["status"] }
     it "responds successfully with an HTTP 401 status code", specific_specs: true do
       get :index
@@ -37,7 +37,7 @@ RSpec.describe AdminsController, type: :controller do
   describe "GET #index in login mode admin user", admin_activity: true do
     let(:expected_template) { get :index }
     it "admin page should render", specific_specs: true do
-      # TODO: _role.html to be written in view spec
+      # TODO: _role.html to be written in view spec since it's a partial rendering
       expect(expected_template).to render_template("admins/index")
       expect(expected_template).to render_template("layouts/application")
     end

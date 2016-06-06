@@ -49,6 +49,7 @@ class ApplicationController < ActionController::Base
   def push_on_channel(channel, notification)
     message = { channel: channel, data: notification }
     uri = URI.parse("http://localhost:9292/faye")
-    Net::HTTP.post_form(uri, message: message.to_json)
+    res = Net::HTTP.post_form(uri, message: message.to_json)
+    res.response.body
   end
 end

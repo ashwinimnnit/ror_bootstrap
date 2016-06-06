@@ -49,7 +49,7 @@
            contentType: false, // Set content type to false as jQuery will tell the server its a query string request
            data: dataToSend, // serializes the form's elements.
            success: function(data){
-               display_image(image,data)
+               display_image(data)
            },
            error: function (data)
            {   
@@ -58,8 +58,8 @@
       })
   }
 
-  function display_image(input,data) {
-     if (data.flag == true)
+  function display_image(data) {
+     if (data.message["flag"]== true)
       {
         VIEW.ChangeSrcAfterImageUpload(data) 
       }
@@ -91,8 +91,6 @@ $( document ).on('page:change',(function() {
     $(".messages-chat").click(function(event) {
      event.preventDefault();
      node = VIEW.GetHtmlOfChatBox($(this))
-    console.log(node)
-     //node = "<div id='chat-room'><div id='chat_header'>Chat </div><div id='message_display'>  </div><textarea cols='50' name='message' class='message_post' channel = "+$(this).attr('href')+"> </textarea></div>"
      $("#chat-room").addClass('show')
      $(".foot").append(node)
     });

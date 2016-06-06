@@ -33,11 +33,10 @@ class ProfilesController < ApplicationController
   end
 
   def send_notifications
-    push_notification(params[:url], params[:data])
-    render nothing: true
-  end
-
-  def admin_add_members
+    response = push_notification(params[:url], params[:data])
+    render json: {
+      message: response
+    }
   end
 
   # GET /profiles/new
@@ -60,9 +59,9 @@ class ProfilesController < ApplicationController
       user: user.id,
       img: user.avatar_file_name
     }
-    respond_to do |format|
-      format.json { render json: @response }
-    end
+    render json: {
+      message: @response
+    }
   end
   # POST /profiles
   # POST /profiles.json

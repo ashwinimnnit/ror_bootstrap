@@ -4,8 +4,8 @@ var VIEW = (function()
   {
     ChangeSrcAfterImageUpload: function(data)
       {
-        $("#dis-img").attr("src", "/system/users/"+data.user+"/medium/"+data.img+"")
-        $(".user-thumb").attr("src", "/system/users/"+data.user+"/thumb/"+data.img+"")
+        $("#dis-img").attr("src", "/system/users/"+data.message["user"]+"/medium/"+data.message["img"]+"")
+        $(".user-thumb").attr("src", "/system/users/"+data.message["user"]+"/thumb/"+data.message["img"]+"")
 
      },
 
