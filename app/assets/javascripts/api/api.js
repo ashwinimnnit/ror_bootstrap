@@ -31,10 +31,22 @@ var API =  (function()
       },
  
    SendRequest: function(uri, data = "some default data")
-   { 
-     $.post("/notifications", { url: uri, data: data }, function(data){
+   {
+     $.get("/chatroom", function(data){
+       SenderId = data.user
+       notification = "Some notification"
+       $.post("/notifications", { url: uri, data: notification, sender: SenderId }, function(){
+       })
      })
+   },
+
+   GetNotifications: function()
+   {
+    $.get("/getnotifications", function(data){
+      console.log(data)
+    })
    }
+   
     
   }
  return UTILS;

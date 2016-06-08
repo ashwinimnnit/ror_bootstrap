@@ -9,6 +9,7 @@ gem 'paperclip-meta'
 
 gem 'eventmachine'
 
+gem 'yaml_db'
 # fatsimage that return image demension
 gem 'faye'
 

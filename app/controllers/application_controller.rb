@@ -27,13 +27,16 @@ class ApplicationController < ActionController::Base
     }
   end
 
-  def push_notification(channel, notification)
+  def push_notification(param)
+    channel = param[:url]
+    notification = param[:data]
+    sender = param[:sender]
     # used so that valid entry is saved in notifications
     channel_prefix, user = validate_user_from_channel channel
     if user
       channel_prefix.camelize
                     .constantize
-                    .call_hook_before_publish(user, notification, channel)
+                    .call_hook_before_publish(user, notification, channel, sender)
       notification = show_user_unread_notification user.id if channel_prefix == "notification"
       push_on_channel(channel, notification)
     else

@@ -27,6 +27,6 @@ class UserAuthentication < ActiveRecord::Base
       token_expires_at: token_expires_at,
       params: params
     )
-    Profile.user_fb_image(user)
+    Profile.user_fb_image(user) if provider.name == "facebook"
   end
 end

@@ -21,22 +21,10 @@ class ProfilesController < ApplicationController
     @profiles = current_user
   end
 
-  def chat_api
-    render json: {
-      user: current_user.id
-    }
-  end
   # GET /profiles/1
   # GET /profiles/1.json
 
   def show
-  end
-
-  def send_notifications
-    response = push_notification(params[:url], params[:data])
-    render json: {
-      message: response
-    }
   end
 
   # GET /profiles/new
@@ -53,14 +41,11 @@ class ProfilesController < ApplicationController
     user = User.find(id)
     attribute = { avatar: params[:user][:avatar] }
     @response = user.update_attributes(attribute)
-    @response = {
+    render json: {
+      user: user.id,
       flag: @response,
       error: user.errors.full_messages,
-      user: user.id,
       img: user.avatar_file_name
-    }
-    render json: {
-      message: @response
     }
   end
   # POST /profiles

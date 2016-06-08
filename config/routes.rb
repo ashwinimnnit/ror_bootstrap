@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # adding custom urls in devise controller
   devise_scope :user do
     post "/user/check_availability/email",
-         to:  "registrations#check_email_availabilty"
+         to:  "registrations#check_email_availability"
     get "user/signup", to:  "registrations#new"
     get "user/password/", to: "password#new", as: "forgot_password"
   end
@@ -34,8 +34,9 @@ Rails.application.routes.draw do
   root "profiles#index"
   get "/admins/add_members", to: "admins#add_members"
   post "/profiles/getuser/image", to: "profiles#fb_image"
-  post "/notifications", to: "profiles#send_notifications"
+  post "/notifications", to: "notifications#send_notifications"
   get "/message/:id", to: "profiles#message"
-  get "/chatroom", to: "profiles#chat_api"
+  get "/chatroom", to: "notifications#logged_in_user"
   post "/post_chat", to: "profiles#send_chat"
+  get "/getnotifications", to: "notifications#display_notification"
 end

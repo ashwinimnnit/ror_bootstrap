@@ -59,7 +59,7 @@
   }
 
   function display_image(data) {
-     if (data.message["flag"]== true)
+     if (data.flag == true)
       {
         VIEW.ChangeSrcAfterImageUpload(data) 
       }
@@ -99,7 +99,12 @@ $( document ).on('page:change',(function() {
     if (e.which == 13) { 
      API.SendRequest($(this).attr('channel'), $(this).val() )
      }
- });
+   });
+
+    $(".user-thumb-name .bubble,.user-thumb.t").click(function(event) {
+      event.preventDefault()
+      API.GetNotifications()
+   })
 
   }));
 

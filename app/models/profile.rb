@@ -23,7 +23,7 @@ class Profile < ActiveRecord::Base
       user.update_attribute(:avatar_file_name, "img.jpg")
       user
     else
-      render json: {
+      {
         message: "User need to be logged-in via fabebook"
       }
     end

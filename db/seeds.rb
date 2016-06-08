@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+# bundle exec rake db:data:load RAILS_ENV=test
+# bundle exec rake db:data:dump

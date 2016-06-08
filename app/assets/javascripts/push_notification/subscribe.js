@@ -11,7 +11,7 @@ var PUSHER = (function()
         client.subscribe("/notification/"+UserId+"", function(data)
         {
           $('.bubble').html(data)
-          $('.bubble').css("display", "block")
+          $('.bubble').removeClass("hide")
         })
        
         client.subscribe("/message/"+UserId+"", function(data)

@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+.noti-tab { border: solid 1px #c2c2c2;width: 30%;}
 
 .m_chat {
     background-color: #d9dfe3;

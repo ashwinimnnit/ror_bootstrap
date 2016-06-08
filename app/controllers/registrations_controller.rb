@@ -29,7 +29,7 @@ class RegistrationsController < Devise::RegistrationsController
     }
   end
 
-  def check_email_availabilty
+  def check_email_availability
     sleep 5
     @user = User.has_email_as params["email"]
     @response = @user.present? ? email_found : email_not_found

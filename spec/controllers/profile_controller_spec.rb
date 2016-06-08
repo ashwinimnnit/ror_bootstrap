@@ -1,4 +1,3 @@
-require "rack/test"
 require "rails_helper"
 RSpec.describe ProfilesController, type: :controller do
   before(:each, user_sign_in: true) do
@@ -21,24 +20,6 @@ RSpec.describe ProfilesController, type: :controller do
     end
   end
 
-  describe "GET #chat_api", user_sign_in: true do
-    let(:expected_response) { JSON.parse(response.body)["user"] }
-    it "returns a user id" do
-      get :chat_api
-      expect(expected_response).to be_instance_of(Fixnum)
-    end
-  end
-
-  describe "Post push_notification", user_sign_in: true do
-    let(:expected_response) { JSON.parse(response.body) }
-    let(:expected_status) { JSON.parse(expected_response["message"]) }
-    let(:url) { "/notification/#{@created_user.id}" }
-    it "returns a user id" do
-      post :send_notifications, url: url, data: "test"
-      expect(expected_status[0]["successful"]).to be(true)
-    end
-  end
-
   describe "Update User Image", user_sign_in: true do
     let(:expected_response) { JSON.parse(response.body) }
     it "returns true If image uploaded successfully" do
@@ -47,7 +28,7 @@ RSpec.describe ProfilesController, type: :controller do
         avatar: Rack::Test::UploadedFile
           .new(Rails.root.join("spec/files/images/test_image.png"), "image/png")
       }
-      expect(expected_response["message"]["flag"]).to be(true)
+      expect(expected_response["flag"]).to be(true)
     end
   end
 end
