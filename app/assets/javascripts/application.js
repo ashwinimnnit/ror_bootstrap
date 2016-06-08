@@ -89,7 +89,6 @@ $( document ).on('page:change',(function() {
      });
 
     $(".messages-chat").click(function(event) {
-     event.preventDefault();
      node = VIEW.GetHtmlOfChatBox($(this))
      $("#chat-room").addClass('show')
      $(".foot").append(node)

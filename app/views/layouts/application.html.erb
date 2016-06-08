@@ -67,7 +67,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Send Request</a>
                     <ul class="dropdown-menu">
                        <% users.each do |f| %>
-                       <li class = "notify"> <a href ="/notification/<%=f.id %>"><%=f.firstname %> <%= f.lastname %></a> </li>
+                       <li class = "notify"> <a channel ="/notification/<%=f.id %>"><%=f.firstname %> <%= f.lastname %></a> </li>
                        <% end %>                  
                    </ul>
                </li>
@@ -78,7 +78,7 @@
                 %>
                 <div class = "<%=display%>"><%=@notifications %></div>
                  <img class="user-thumb t" src="/images/notification.jpg" >
-               <span class ="user-thumb-span" > Hi <%=current_user.profile.fname %><%=current_user.profile.lname %></span>
+               <span class ="user-thumb-span" > Hi <%=current_user.firstname %></span>
                <div class ="header-img"><%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %></div>
             </a>
           </li>
@@ -102,7 +102,7 @@
           <div class="well sidebar-nav">
             <h3>Chat list</h3>
              <% users.each do |f| %>
-             <li> <a href ="/message/<%=f.id %>" class = "messages-chat"><%=f.firstname %> <%= f.lastname %></a> </li>
+             <li> <a channel ="/message/<%=f.id %>" class = "messages-chat"><%=f.firstname %> <%= f.lastname %></a> </li>
              <% end %>
             <ul class="nav nav-list">
             </ul>

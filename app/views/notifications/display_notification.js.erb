@@ -1,3 +1,4 @@
 $(".user-thumb-name").append("<div class='container'> <table class= 'table table-striped noti-tab'><thead> </thead><tbody><% @unread_notification.each do |m| %><tr><td><%= m[:sender] %> has sent you <%=m[:message]%> </td></tr><% end %></tbody></table></div>")
 
+$(".bubble").addClass("hide")
 

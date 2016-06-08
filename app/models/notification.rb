@@ -11,6 +11,6 @@ class Notification < ActiveRecord::Base
   end
 
   def self.user_notification(user)
-    Notification.where("user_id = ? AND STATUS = false", user.id).limit(5)
+    where("user_id = ? AND STATUS = false", user.id).limit(5)
   end
 end

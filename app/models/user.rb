@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   has_many :roles
   after_create :set_profile
   has_many :receivers, class_name: "Notification", dependent: :destroy,
-                                foreign_key: "user_id"
+                       foreign_key: "user_id"
   has_many :senders, class_name: "Notification", foreign_key: "sender_id"
   # paperclip image upload gem method
   has_attached_file :avatar,

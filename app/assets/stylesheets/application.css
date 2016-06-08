@@ -36,8 +36,9 @@ background: #e02424 none repeat scroll 0 0;
     border-radius: 3px;
     color: #fff;
     font: bold 0.9em Tahoma,Arial,Helvetica;
-    padding: 2px 6px;
-    position: absolute;
+    padding: 2px;
+    float:left;
+    clear:both;
     right: 132px;
     top: 6px;
 
@@ -93,6 +94,8 @@ background-color: #f5f5f5;
     width: 100%;
 }
 
+.notify { cursor:pointer }
+.messages-chat{ cursor:pointer; text-decoration:none }
  .header{background-color: #ecf0f1;height: 49px;padding: 11px 0 1px 17px}
  .admin-add-member-role{border: 1px solid #c2c2c2;padding: 9px 22px 9px 18px;position: relative;width: 50%;  }
  .suggestion-data{height: 20px;left: 230px;position: relative;width: 50%;}
@@ -109,7 +112,7 @@ background-color: #f5f5f5;
    text-align: center; 
 }
 .header-img{ position: relative;
-    right: -105px;
+    right: -140px;
     top: -32px;}
 .admin-add-member .form-control { width:40% }
 input { border: 1px solid #c2c2c2; height: 29px; padding: 3px 11px 5px 8px;}
