@@ -8,7 +8,9 @@ gem 'puma'
 gem 'paperclip-meta'
 
 gem 'eventmachine'
+gem 'rest-client', '~> 1.8'
 
+gem 'httparty'
 gem 'yaml_db'
 # fatsimage that return image demension
 gem 'faye'

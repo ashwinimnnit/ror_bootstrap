@@ -39,4 +39,11 @@ Rails.application.routes.draw do
   get "/chatroom", to: "notifications#logged_in_user"
   post "/post_chat", to: "profiles#send_chat"
   get "/getnotifications", to: "notifications#display_notification"
+  # dynamic routing for api
+  get "/apis", to: "apis/welcome#index"
+  post ":controller(/:action(/*params))", controller: /apis\/[^\/]+/
+  get ":controller(/:action(/*params))", controller: /apis\/[^\/]+/
+  put ":controller(/:action(/*params))", controller: /apis\/[^\/]+/
+  patch ":controller(/:action(/*params))", controller: /apis\/[^\/]+/
+  delete ":controller(/:action(/*params))", controller: /apis\/[^\/]+/
 end

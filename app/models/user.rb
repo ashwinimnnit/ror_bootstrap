@@ -81,6 +81,13 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.create_user_from_api(param)
+    create(email:  param["email"],
+           firstname: param["firstname"],
+           lastname: param["lastname"],
+           password: param["password"])
+  end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       fb_data = session["devise.facebook_data"]
