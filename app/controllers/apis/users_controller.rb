@@ -2,7 +2,7 @@ module Apis
   class UsersController < ApiController
     def create_users
       diff = mandatory_keys mandatory_keys_for_signup
-      if diff.empty?
+      if diff.nil?
         response = diff
         errors = "missing fields"
       else

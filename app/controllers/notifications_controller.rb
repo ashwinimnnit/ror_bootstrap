@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
       response[:sender] = n.senders.firstname + "  " + n.senders.lastname
       @unread_notification << response
     end
-    Notification.where("user_id = #{current_user.id}").update_all(status: true)
+    Notification.where("user_id = #{current_user.id}").update_all(seen: true)
   end
 
   def send_notifications
