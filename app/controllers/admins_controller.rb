@@ -52,6 +52,7 @@ class AdminsController < ApplicationController
   def bulk_user_update
     unless (@changed_date = params["userchg"].to_a -
             params["userori"].to_a).empty?
+      remove_unnecessary_whitespace @changed_date
       User.bulk_edit @changed_date
     end
     redirect_to(action: "list")
