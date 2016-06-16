@@ -68,5 +68,6 @@ class ApplicationController < ActionController::Base
       end
       user_new_hash[uid] = @tmp_hash
     end
+    user_new_hash
   end
 end
