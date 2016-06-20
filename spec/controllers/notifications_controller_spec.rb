@@ -21,7 +21,7 @@ RSpec.describe NotificationsController, type: :controller do
     it "returns a user id" do
       post :send_notifications, url: url, data: "test"
       # TODO: insert test to be done in model test
-      expect(@created_user.reload.push_notifications).not_to eq(0)
+      expect(@created_user.reload.receivers).not_to eq(0)
       expect(expected_status[0]["successful"]).to be(true)
     end
   end

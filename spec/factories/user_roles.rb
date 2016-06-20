@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :user_role do
-    name "dummy_role"
+    name  "dummy_role"
   end
 end

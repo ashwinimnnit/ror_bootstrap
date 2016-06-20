@@ -32,5 +32,4 @@ FactoryGirl.define do
     confirmed_at "2016-05-19 10:06:58"
     admin true
   end
-
 end
