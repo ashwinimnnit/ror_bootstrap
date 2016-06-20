@@ -81,6 +81,7 @@ class User < ActiveRecord::Base
     user
   end
 
+  # creating user via api
   def self.create_user_from_api(param)
     create(email:  param["email"],
            firstname: param["firstname"],

@@ -50,11 +50,9 @@ class AdminsController < ApplicationController
   end
 
   def bulk_user_update
-    private_method_call
     unless (@changed_data = params["userchg"].to_a -
             params["userori"].to_a).empty?
       filtered_data = remove_unnecessary_whitespace @changed_data
-      debugger
       User.bulk_edit filtered_data
     end
     redirect_to(action: "list")
