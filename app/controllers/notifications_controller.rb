@@ -1,3 +1,4 @@
+# comments
 class NotificationsController < ApplicationController
   def display_notification
     @unread_notification = []
