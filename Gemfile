@@ -7,6 +7,9 @@ gem 'puma'
 
 gem 'paperclip-meta'
 
+# react js
+gem 'react-rails'
+
 gem 'eventmachine'
 gem 'rest-client', '~> 1.8'
 

@@ -7,7 +7,6 @@
     <title><%= content_for?(:title) ? yield(:title) : "Talen" %></title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag "application", :media => "all" %>
-
     <!-- For third-generation iPad with high-resolution Retina display: -->
     <!-- Size should be 144 x 144 pixels -->
     <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
@@ -87,10 +86,11 @@
         </div>
       </div>
     </div>
-
+    <% if controller_name != "admins" %>
    <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">          
+            <input type="text" class="form-control srch-term" placeholder="Search" name="srch-term" id="srch-term">          
         </div>
+    <% end %>
      <% end %>
     <div class="container">
       <div class="row">

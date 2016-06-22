@@ -1,2 +1,5 @@
 <p id="notice"><%= notice %></p>
 <br>
+<div>
+<%= react_component('Profile',{firstname: @profiles.firstname, lastname: @profiles.lastname}, {prerender: true}) %>
+</div>
