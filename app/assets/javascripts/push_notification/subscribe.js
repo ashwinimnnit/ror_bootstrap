@@ -5,11 +5,10 @@ var PUSHER = (function()
     Subscription: function()
     {
       var client = new Faye.Client('http://localhost:9292/faye');
-      $.get("/chatroom", function (data)
-      {
-        var UserId = data.user
+       var cookiee = PUSHER.GetCookiee("user");
+        var UserId = cookiee
         client.subscribe("/notification/"+UserId+"", function(data)
-        {
+        { 
           $('.bubble').html(data)
           $('.bubble').removeClass("hide")
         })
@@ -18,7 +17,18 @@ var PUSHER = (function()
         {
           alert (data)
         })
-      });
+    },
+
+    GetCookiee: function(name)
+    {
+      console.log(typeof document.cookie)
+      var CookieeObj = new Object;
+      var CookieArray = document.cookie.split(";")
+      for( i=0; i< CookieArray.length; i++) {
+          var tmp = CookieArray[i].split("=")
+          CookieeObj[tmp[0]] = tmp[1];
+      }
+       return CookieeObj[name]
     }
   }
   return UTILS;

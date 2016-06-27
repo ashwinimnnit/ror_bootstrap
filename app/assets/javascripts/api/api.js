@@ -31,13 +31,12 @@ var API =  (function()
       },
  
    SendRequest: function(uri, data = "some default data")
-   {
-     $.get("/chatroom", function(data){
-       SenderId = data.user
+   { 
+       cookiee = PUSHER.GetCookiee("user")
+       SenderId = cookiee
        notification = "Some notification"
        $.post("/notifications", { url: uri, data: notification, sender: SenderId }, function(){
        })
-     })
    },
 
    GetNotifications: function()

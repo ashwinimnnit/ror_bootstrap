@@ -19,6 +19,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profiles = current_user
+    cookies[:user] = @profiles.id
   end
 
   # GET /profiles/1

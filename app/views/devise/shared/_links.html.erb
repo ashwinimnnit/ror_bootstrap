@@ -12,7 +12,7 @@
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations'  %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "btn-default login" %><br />
+  <%= link_to "Resend confirmation instructions?", new_confirmation_path(resource_name), class: "btn-default login" %><br><br />
   <br/><br/>
 <% end -%>
 

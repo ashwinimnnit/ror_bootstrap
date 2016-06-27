@@ -13,7 +13,48 @@
  *= require_tree .
  *= require_self
  */
-.noti-tab { border: solid 1px #c2c2c2;width: 30%;}
+.arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  
+  border-bottom: 5px solid black;
+}
+.container.ined {
+    margin-left: 20%;
+    width: 80%;
+    background-color: #f2f2f2
+}
+.login{ 
+float:left;
+width:100%
+
+}
+#admin-header {
+    margin-left: 37%;
+    position: relative;
+}
+
+#user-edit table td > input {
+     background-color: #f2f2f2
+}
+
+.srch-term{ top:203px}
+#triangle-up {
+    margin-left: 209px;
+    border-bottom: 13px solid #3090c7;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    height: 0;
+    width: 0;
+}
+.msg_tab {
+    margin-left: -210px;
+    position: relative;
+    top: -46px;
+}
+.noti-tab { border: solid 1px #c2c2c2; background-color: #3090c7;color:white}
 
 .m_chat {
     background-color: #d9dfe3;
@@ -97,8 +138,19 @@ background-color: #f5f5f5;
 .notify { cursor:pointer }
 .messages-chat{ cursor:pointer; text-decoration:none }
  .header{background-color: #ecf0f1;height: 49px;padding: 11px 0 1px 17px}
- .admin-add-member-role{border: 1px solid #c2c2c2;padding: 9px 22px 9px 18px;position: relative;width: 50%;  }
- .suggestion-data{height: 20px;left: 230px;position: relative;width: 50%;}
+ .admin-add-member-role{
+border: 1px solid #c2c2c2;
+    padding: 9px 22px 9px 18px;
+    position: relative;
+    margin-left: 79px;
+    width: 50%
+
+
+  }
+ .suggestion-data{
+     left: 186px;
+     position: relative;
+  }
  ::-webkit-input-placeholder {text-align: center;}
 :-moz-placeholder { /* Firefox 18- */
    text-align: center;  
@@ -115,8 +167,8 @@ background-color: #f5f5f5;
     right: -140px;
     top: -32px;}
 .admin-add-member .form-control { width:40% }
-input { border: 1px solid #c2c2c2; height: 29px; padding: 3px 11px 5px 8px;}
-#update_pic {background-color: #ecf0f1;left: 213px;margin-left: 558px;position: relative;top: -109px;width: 200px;
+input :not(#user_avatar) { border: 1px solid #c2c2c2; height: 29px; padding: 3px 11px 5px 8px;}
+#update_pic {background-color: #ecf0f1;position: relative;width: 200px;
 padding: 19px 13px 23px 9px;}
 #change-picture{background-color: black;color: white;cursor: pointer; font-size: 15px; margin-left: 33px;padding: 2px 5px 3px 7px;position: relative;top: -37px;display:none;width: 147px; }
 #update-usr{display:none}
@@ -130,24 +182,30 @@ max-height: 100%;
 max-width: 100%;
 border-radius: 62%;
 }
+
+.link{
+padding: 5px 15px 8px 14px;
+    text-decoration: none;
+}
 .user-thumb-name{margin-left: -84px;position: relative;text-decoration: none;top: -2px;}
 .user-thumb-span { position: relative;top: -10px;}
- .user-med-pic{ margin-left: 780px;position: relative; top:-133px} .user-profile{ position: relative;top: -133px;}
+ .user-med-pic{ position: relative} .user-profile{ position: relative;top: -133px;}
 #email_not_available { background-color: #B30000;color :white;border-radius: 4px; padding: 7px;position: relative }
-.sub-roles {margin-left: 909px; position: relative;top: 77px;}
+.sub-roles {margin-left: 710px; position: relative;top: 144px;}
 .user-med-pic:hover  #change-picture { display:block; }
 #dis-img {border:solid 1px #7c7c7c}
-.new_user #user_email{ width:381px;margin-left:102px }
-.new_user #user_password { width : 381px;margin-left:74px }
-.new_user #user_password_confirmation { width :381px; margin-left:20px}
-.new_user #user_firstname { margin-left :101px;width:198px }
-.new_user #commit { margin-left :360px }
+.new_user #user_email{ width:100% }
+.new_user #user_password { width : 100% }
+.new_user #user_password_confirmation { width :100%}
+.new_user #user_firstname {width:50%;float:left }
+#user_lastname{ width: 50%}
+.new_user #commit { }
 .new_user #user_avatar { margin-left :10px;display: inline;}
 input[type='file'] { color:transparent;border: none !important;   }
 .required label:after {color: red; content:" *"; }
-.new_user input { border: 1px solid #c2c2c2; height: 29px; padding: 3px 11px 5px 8px;}
-.new_user { background-color: #f6f6f6;padding: 50px 0 6px 139px;}
-.btn-default.login {background-color: #cacaca;border-color: #cccccc;color: #525252;height: 10px;padding: 11px 35px 12px 29px;
+.new_user input { border: 1px solid #c2c2c2; height: 29px;}
+.new_user { background-color: #f6f6f6}
+.btn-default.login {background-color: #cacaca;border-color: #cccccc;color: #525252;padding: 11px 35px 12px 125px;
  text-decoration: none; }
 .error {color : #b30000 }
 .new_user input.error {border:1px solid #b30000;}
