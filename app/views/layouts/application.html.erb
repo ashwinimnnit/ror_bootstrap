@@ -30,6 +30,9 @@
     <%= javascript_include_tag "application", "http://localhost:9292/faye.js" %>
      <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
      <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+     <%= stylesheet_link_tag  'jquery' %>
+    <%#= javascript_include_tag 'http://code.jquery.com/jquery-1.10.2.js' %> <!-- causing issue in push notification-->
+   <%= javascript_include_tag 'http://code.jquery.com/ui/1.11.4/jquery-ui.js' %>
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
@@ -48,7 +51,7 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
              <% if current_user && current_user.admin %>
-            <li><%= link_to 'Adminstration', :controller => 'admins' , :action => 'index' %></li>
+              <li><%= link_to 'Adminstration', :controller => 'admins', :action => 'index' %></li>
              <% end %>
               <% if current_user %> 
                <li class="dropdown">
@@ -76,8 +79,8 @@
                    display = @notifications > 0 ? "bubble" : "bubble hide "
                 %>
                 <div class = "<%=display%>"><%=@notifications %></div>
-                 <img class="user-thumb t" src="/images/notification.jpg" >
-               <span class ="user-thumb-span" > Hi <%=current_user.firstname %></span>
+                  <img class="user-thumb t" src = "/images/notification.jpg" >
+                  <span class ="user-thumb-span" >Hi <%=current_user.firstname %></span>
                <div class ="header-img"><%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %></div>
             </a>
           </li>
@@ -86,14 +89,14 @@
         </div>
       </div>
     </div>
-    <% if controller_name != "admins" %>
-   <div class="input-group">
-            <input type="text" class="form-control srch-term" placeholder="Search" name="srch-term" id="srch-term">          
-        </div>
-    <% end %>
      <% end %>
-    <div class="container">
+    <div class="container ined">
       <div class="row">
+      <% if controller_name != "admins"  && false %>
+     <div class="input-group">
+              <input type="text" class="form-control srch-term" placeholder="Search" name="srch-term" id="srch-term">
+          </div>
+      <% end %>
         <div class="col-lg-9">
           <%= bootstrap_flash %>
           <%= yield %>

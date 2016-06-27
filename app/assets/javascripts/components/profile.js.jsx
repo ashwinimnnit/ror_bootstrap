@@ -10,7 +10,8 @@ var Profile = React.createClass({
       <div>
         <div>Firstname: {this.props.firstname} </div>
         <div>Lastname: {this.props.lastname}</div>
-      </div>
+     </div>
     );
   }
+
 });

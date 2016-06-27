@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, content_type: /\Aimage/
   # before_save :extract_dimensions
-  scope :has_firstname_as, -> (param) { where("firstname LIKE ?", "#{param}%").limit(5) }
+  scope :has_firstname_as, -> (param) { where("firstname ILIKE ?", "#{param}%").limit(5) }
 
   scope :has_email_as, -> (param) { where("email = ?", param) }
 
