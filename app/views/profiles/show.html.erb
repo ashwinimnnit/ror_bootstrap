@@ -1,15 +1,5 @@
 <p id="notice"><%= notice %></p>
 <div class = "user-details" >
-   <h1>Welcome <%=@profile.fname %> &nbsp<%=@profile.lname %> </h1>
-      <p>
-      <strong>Fname:</strong>
-      <%= @profile.fname %>
-     </p>
-    <strong>Roles</strong> <%= display_user_roles  @user%>
-     <p>
-      <strong>Lname:</strong>
-      <%= @profile.lname %>
-   </p>
 </div>
 
 <%= form_for @user, 
@@ -24,7 +14,7 @@
     <div style = "display:none" id = "update_pic" >
     <%= render partial: 'devise/registrations/image_upload' , locals: { f: f } %>
     <input type = "button" value ="Update" id= "update-img" 
-      onclick ="AjaxUpdateImage($('form').attr('action'), $('form').attr('id'))" />
+      onclick ="AjaxUpdateImage($('form').attr('action'), $('form').attr('id'))" /><br>
      <button type="button" class ="fb_up_pic" id = "fb_up" >Use my facebook image</button> 
     </div>
 <% end %>

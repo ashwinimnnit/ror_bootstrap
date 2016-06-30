@@ -34,8 +34,11 @@ var API =  (function()
    { 
        cookiee = PUSHER.GetCookiee("user")
        SenderId = cookiee
-       notification = "Some notification"
-       $.post("/notifications", { url: uri, data: notification, sender: SenderId }, function(){
+       notification = data
+       $.post("/notifications", { url: uri, data: notification, sender: SenderId }, function(data){
+       //ChannelName = JSON.parse(data.message)[0]["channel"]
+       //IsMessage = ChannelName.match(/message/g)
+        //API.GetChatBox(ChannelName)
        })
    },
 
@@ -44,9 +47,14 @@ var API =  (function()
     $.get("/getnotifications", function(data){
       console.log(data)
     })
-   }
+   },
    
-    
+   GetChatBox: function(channel)
+   {
+    sender = PUSHER.GetCookiee("user")
+    $.get("/chatroom", {url: channel},  function(data){
+   })
+   }
   }
  return UTILS;
 })();

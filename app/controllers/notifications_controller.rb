@@ -24,4 +24,10 @@ class NotificationsController < ApplicationController
       user: current_user.id
     }
   end
+
+  def chat
+    @channel = params[:url]
+    arr = validate_user_from_channel params[:url]
+    @user = arr[1]
+  end
 end

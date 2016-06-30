@@ -37,7 +37,14 @@ class ApplicationController < ActionController::Base
       channel_prefix.camelize
                     .constantize
                     .call_hook_before_publish(user, notification, channel, sender)
-      notification = show_unread_notification user.id if channel_prefix == "notification"
+      if channel_prefix == "notification"
+        notification = show_unread_notification user.id
+      else
+        notification = {
+          message: param[:data],
+          channel: "/message/#{sender}"
+        }
+      end
       push_on_channel(channel, notification)
     else
       logger.info("User doesn't exist for channel: #{channel}")

@@ -98,8 +98,11 @@ $( document ).on('page:change',(function() {
     });
 
    $(document).on('keypress', '.message_post', function(e){
-    if (e.which == 13) { 
-     API.SendRequest($(this).attr('channel'), $(this).val() )
+    if (e.which == 13) {
+     chat = $(this).val()
+     $(this).val("")
+     VIEW.AppendChat(chat, "show-chat", $(this).attr('channel'))
+     API.SendRequest($(this).attr('channel'), chat )
      }
    });
 

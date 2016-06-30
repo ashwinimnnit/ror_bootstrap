@@ -21,9 +21,9 @@
   
   border-bottom: 5px solid black;
 }
-.container.ined {
-    margin-left: 20%;
-    width: 80%;
+.ined {
+   /* margin-left: 20%;*/
+    width: 59%;
     background-color: #f2f2f2
 }
 .login{ 
@@ -35,6 +35,33 @@ width:100%
     margin-left: 37%;
     position: relative;
 }
+
+.gc{
+max-width: 105px;
+    width: 11em;
+   padding: 7px;
+}
+.show-chat{
+word-wrap: break-word;
+background-color: #C1C187;
+    border-radius: 15px 0 12px;
+    margin-left: 1%;
+    padding: 4px 6px 3px 7px;
+    position: relative;
+    top: 5%
+}
+
+.show-chat_ {
+word-wrap: break-word;
+background-color: #a3a396;
+    border-radius: 15px 0 12px;
+    float:right;
+    right: -138%;
+    padding: 4px 6px 3px 7px;
+    position: relative;
+    top: 5%
+}
+
 
 #user-edit table td > input {
      background-color: #f2f2f2
@@ -89,6 +116,17 @@ max-width: 26%;
 margin-left :70%
 }
 
+.mul_chat{
+    bottom: 0%;
+    display: inline-flex;
+    float: right;
+    margin: auto;
+    position: fixed;
+    width: 100%;
+
+
+}
+
 .well
 {
 background-color: #f5f5f5;
@@ -122,17 +160,54 @@ background-color: #f5f5f5;
     width: 64%; 
     }
 
-#message_display {height: 400px; background-color: #f1f1f1;
-    border: 1px solid #c2c2c2; width:100%;}
+#message_display {height: 253px; 
+background-color: #f1f1f1;
+    border: 1px solid #c2c2c2;
+overflow-y: auto;
+}
+
+.chat-box{
+  width:22%;
+  position:relative;
+}
+
+.chat-list {
+background-color: #d9dfe3;
+    bottom: 4%;
+    font-family: "Liberation Sans";
+    margin-left: 1%;
+    padding: 10px 15px 12px 28px;
+    position: fixed;
+
+}
+
+.messlist{
+cursor: pointer;
+    padding: 9px 6px 2px 12px;
+    text-decoration: none;
+
+}
+.cl { text-decoration:none !important}
+
+#chat-min { position:fixed;float:left;margin-left:-90px;cursor:pointer }
+
+#chat-max { position:fixed;float:left;right:29px;cursor:pointer }
+
+#chat_box{
+width: 100%
+}
 
 .message_post { border: 1px solid #c2c2c2;
     position: relative;
     resize: none;
     top: 87%;
-    width: 100%;  }
+    width: 100%;
+    overflow: auto 
+       }
 #chat_header { background-color: #a4b4b5;
     padding: 14px 0 11px 103px;
     width: 100%;
+    cursor:pointer;
 }
 
 .notify { cursor:pointer }
