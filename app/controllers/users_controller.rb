@@ -1,4 +1,4 @@
-# comment
+# comment user
 class UsersController < ApplicationController
   def show
   end
