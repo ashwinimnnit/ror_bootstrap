@@ -1,0 +1,8 @@
+<div class = "chat-dilog-box" >
+<div id="chat_box">
+   <div id="chat_header"><span id = "chat-min">--</span>Chat </div>
+   <div id="message_display">
+     <textarea cols="50" name="message" class="message_post"> </textarea>
+   </div>
+</div>
+</div>
