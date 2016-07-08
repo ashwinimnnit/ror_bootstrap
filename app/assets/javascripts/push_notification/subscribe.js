@@ -16,13 +16,12 @@ var PUSHER = (function()
         client.subscribe("/message/"+UserId+"", function(data)
         {
           var UserchatBox = $('#_chat-box').attr("channel")
-          if (VIEW.ChatBoxExist(data.channel) )
+          if (VIEW.ChatBoxExist(data.channel))
           {
            API.GetChatBox(data.channel)
           }
-
-          VIEW.AppendChat(data.message, "show-chat_", data.channel)
-        })
+            VIEW.AppendChat(data.message, "show-chat_", data.channel)
+           })
     },
 
     GetCookiee: function(name)

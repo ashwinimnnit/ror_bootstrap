@@ -36,9 +36,6 @@ var API =  (function()
        SenderId = cookiee
        notification = data
        $.post("/notifications", { url: uri, data: notification, sender: SenderId }, function(data){
-       //ChannelName = JSON.parse(data.message)[0]["channel"]
-       //IsMessage = ChannelName.match(/message/g)
-        //API.GetChatBox(ChannelName)
        })
    },
 
@@ -51,10 +48,19 @@ var API =  (function()
    
    GetChatBox: function(channel)
    {
+    var html;
     sender = PUSHER.GetCookiee("user")
-    $.get("/chatroom", {url: channel},  function(data){
-   })
-   }
+    $.ajax({
+     url : "/chatroom",
+     type: "GET",
+     data: {url: channel},
+     async: false,
+     success: function(data){
+     html = data
+     }
+     })
+   return html
+  }
   }
  return UTILS;
 })();

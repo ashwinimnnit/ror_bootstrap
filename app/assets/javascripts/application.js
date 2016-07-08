@@ -98,8 +98,9 @@ $( document ).on('page:change',(function() {
     });
 
    $(document).on('keypress', '.message_post', function(e){
-    if (e.which == 13) {
-     chat = $(this).val()
+   chat = $(this).val().trim()
+   if (e.which == 13 && chat) {
+     e.preventDefault() 
      $(this).val("")
      VIEW.AppendChat(chat, "show-chat", $(this).attr('channel'))
      API.SendRequest($(this).attr('channel'), chat )

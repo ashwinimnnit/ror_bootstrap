@@ -53,47 +53,45 @@
               <li><%= link_to 'Adminstration', :controller => 'admins', :action => 'index' %></li>
              <% end %>
               <% if current_user %> 
-               <li class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">More Options<b class="caret"></b></a>
-                 <ul class="dropdown-menu">
-                   <li><%= link_to 'Edit Profile', edit_profile_path(current_user.profile.id) %></li>
-                   <li><%= link_to "Edit Account", edit_user_registration_path(:id => current_user.id) %></li>
-                   <li><%= link_to "Sign Out" , destroy_user_session_path , :method => 'delete'%></li>                    
-                </ul>
-             </li>                 
-            <li><a href="/about_us">About Us</a></li>
-            <li> <a href="/contact_us">Contcat us</a></li>
-   
-             <li class="dropdown">
+                <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">More Options<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to 'Edit Profile', edit_profile_path(current_user.profile.id) %></li>
+                      <li><%= link_to "Edit Account", edit_user_registration_path(:id => current_user.id) %></li>
+                      <li><%= link_to "Sign Out" , destroy_user_session_path , :method => 'delete'%></li>                    
+                    </ul>
+                </li>                 
+                <li><a href="/about_us">About Us</a></li>
+                <li> <a href="/contact_us">Contcat us</a></li>
+                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Send Request</a>
                     <ul class="dropdown-menu">
                        <% users.each do |f| %>
-                       <li class = "notify"> <a channel ="/notification/<%=f.id %>"><%=f.firstname %> <%= f.lastname %></a> </li>
+                         <li class = "notify"> <a channel ="/notification/<%=f.id %>"><%=f.firstname %> <%= f.lastname %></a> </li>
                        <% end %>                  
-                   </ul>
+                    </ul>
+                </li>
+                <li class = "header-profile"> 
+                  <a href = "<%= profile_path(:id => current_user.profile.id) %>" class = "user-thumb-name">
+                    <% @notifications = show_unread_notification(current_user.id) 
+                      display = @notifications > 0 ? "bubble" : "bubble hide "
+                     %>
+                   <div class = "<%=display%>"><%=@notifications %></div>
+                     <img class="user-thumb t" src = "/images/notification.jpg" >
+                     <span class ="user-thumb-span" >Hi <%=current_user.firstname %></span>
+                   <div class ="header-img"><%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %></div>
+                 </a>
                </li>
-           <li class = "header-profile"> 
-             <a href = "<%= profile_path(:id => current_user.profile.id) %>" class = "user-thumb-name">
-                <% @notifications = show_unread_notification(current_user.id) 
-                   display = @notifications > 0 ? "bubble" : "bubble hide "
-                %>
-                <div class = "<%=display%>"><%=@notifications %></div>
-                  <img class="user-thumb t" src = "/images/notification.jpg" >
-                  <span class ="user-thumb-span" >Hi <%=current_user.firstname %></span>
-               <div class ="header-img"><%= image_tag current_user.avatar.url(:thumb), class: 'user-thumb' %></div>
-            </a>
-          </li>
-
-          </ul>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-     <% end %>
     <div class="chat-list"> 
     <% users.each do |f| %>
       <li class = "messlist"> <a channel ="/message/<%=f.id %>" class ="cl" ><%=f.firstname %> <%= f.lastname %></a> </li>
       <% end %>
     </div>
+   <% end %>
     <div class="container ined">
       <div class="row">
       <% if controller_name != "admins"  && false %>

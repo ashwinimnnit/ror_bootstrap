@@ -23,6 +23,7 @@
 }
 .ined {
    /* margin-left: 20%;*/
+    min-width: 391px;
     width: 59%;
     background-color: #f2f2f2
 }
@@ -31,6 +32,14 @@ float:left;
 width:100%
 
 }
+
+.cls-chat{
+cursor: pointer;
+    float: right;
+    height: 17px;
+    width: 12%;
+} 
+
 #admin-header {
     margin-left: 37%;
     position: relative;
@@ -44,7 +53,7 @@ max-width: 105px;
 .show-chat{
 word-wrap: break-word;
 background-color: #C1C187;
-    border-radius: 15px 0 12px;
+    border-radius: 9px;
     margin-left: 1%;
     padding: 4px 6px 3px 7px;
     position: relative;
@@ -54,7 +63,7 @@ background-color: #C1C187;
 .show-chat_ {
 word-wrap: break-word;
 background-color: #a3a396;
-    border-radius: 15px 0 12px;
+    border-radius: 9px;
     float:right;
     right: -138%;
     padding: 4px 6px 3px 7px;
@@ -124,7 +133,13 @@ margin-left :70%
     position: fixed;
     width: 100%;
 
+}
 
+.nav-adjst{
+float: left;
+    left: 29%;
+    position: fixed;
+    top: 12%;
 }
 
 .well
@@ -168,7 +183,6 @@ overflow-y: auto;
 
 .chat-box{
   width:22%;
-  position:relative;
 }
 
 .chat-list {
@@ -204,10 +218,13 @@ width: 100%
     width: 100%;
     overflow: auto 
        }
-#chat_header { background-color: #a4b4b5;
-    padding: 14px 0 11px 103px;
+#chat_header {
+background-color: #a4b4b5;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
     width: 100%;
-    cursor:pointer;
+ 
 }
 
 .notify { cursor:pointer }
