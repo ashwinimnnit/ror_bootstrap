@@ -24,7 +24,8 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers:  [:google_oauth2, :facebook]
   has_one :profile, dependent: :destroy
   has_many :posts,  dependent: :destroy
-  has_many :roles
+  has_many :member_role, dependent: :destroy
+  has_many :roles, through: :member_role
   after_create :set_profile
   has_many :receivers, class_name: "Notification", dependent: :destroy,
                        foreign_key: "user_id"
@@ -71,13 +72,15 @@ class User < ActiveRecord::Base
   end
 
   # creating a user by admin
-  def self.create_user(params)
-    user = User.new(email:  params["user"]["email"],
-                    firstname: params["user"]["firstname"],
-                    lastname: params["user"]["lastname"],
-                    password: "12345678")
+  def self.create_user(param)
+    user = create(email:  param["user"]["email"],
+                  firstname: param["user"]["firstname"],
+                  lastname: param["user"]["lastname"],
+                  password: "12345678")
+    param[:users] = []
+    param[:users] << user.id
+    MemberRole.role_assignment param if param[:roles].present?
     user.skip_confirmation!
-    user.save
     user
   end
 

@@ -1,7 +1,7 @@
 module Apis
   class RolesController < ApiController
     def add_roles
-      response = UserRole.create(name: params[:name]) # if request_is_valid_post?
+      response = Role.create(name: params[:name]) # if request_is_valid_post?
       if response.errors.any?
         render_403(response)
       else
@@ -14,7 +14,7 @@ module Apis
     end
 
     def index
-      response = UserRole.display_roles
+      response = Role.display_roles
       if response.count == 0
         existing_role = "No Roles found"
         status = 404
@@ -30,7 +30,7 @@ module Apis
         render_update("id = #{params[:id]} or name = #{params[:name]} are missing")
         return
       end
-      response = UserRole.update_resource(params)
+      response = Role.update_resource(params)
       if response.nil?
         response = {
           status: 404,

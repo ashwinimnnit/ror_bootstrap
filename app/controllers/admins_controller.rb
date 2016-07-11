@@ -26,7 +26,7 @@ class AdminsController < ApplicationController
 
   def admin_assign_roles
     if params.key?("users") && params.key?("roles")
-      @message = Role.bulk_assignment_roles params
+      @message = MemberRole.role_assignment params
     end
     redirect_to(action: "index")
   end

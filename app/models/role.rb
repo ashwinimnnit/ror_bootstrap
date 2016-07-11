@@ -11,9 +11,10 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 class Role < ActiveRecord::Base
-  belongs_to :user
+  has_many :member_role
+  has_many :user, through: :member_role
   has_many :posts
-  validates :user_id, uniqueness: { scope: :user_role }
+  validates :name, presence: true
 
   def self.assignment_roles(user, roles)
     roles.each do |r|
@@ -30,5 +31,26 @@ class Role < ActiveRecord::Base
         user.roles << Role.create(user_id: user.id, user_role: new_role)
       end
     end
+  end
+
+  def self.update_resource(param)
+    id = param[:id]
+    name = param[:name]
+    role = where("id = ?", id).first
+    role.update_attribute("name", name) if role
+    role
+  end
+
+  def self.display_roles
+    existing_role = {}
+    available_roles = Role.all
+    index = 0
+    available_roles.each do |res|
+      temp = {}
+      temp["id"] = res.id
+      temp["name"] = res.name
+      existing_role[index += 1] = temp
+    end
+    existing_role
   end
 end

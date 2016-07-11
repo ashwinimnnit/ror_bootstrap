@@ -12,6 +12,6 @@
 # GNU General Public License for more details.
 module AdminsHelper
   def display_roles
-    CONFIG
+    Role.all
   end
 end
