@@ -10,13 +10,13 @@ describe Apis::RolesController do
     @request.env["devise.mapping"] = Devise.mappings[:user]
     @created_user = create(:user)
     sign_in @created_user
-    @created_role = create(:user_role)
+    @created_role = create(:role)
   end
 
   describe "Create roles", user_sign_in: true do
     let(:created_role) { JSON.parse(response.body) }
-    it "Creates a users via api controller" do
-      post :add_roles, attributes_for(:user_role)
+    it "Create roles via api controller" do
+      post :add_roles, attributes_for(:role)
       expect(created_role["status"]).to be(200)
     end
   end

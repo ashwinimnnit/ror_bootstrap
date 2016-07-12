@@ -16,23 +16,6 @@ class Role < ActiveRecord::Base
   has_many :posts
   validates :name, presence: true
 
-  def self.assignment_roles(user, roles)
-    roles.each do |r|
-      user.roles.create(user_role: r)
-    end
-  end
-
-  def self.bulk_assignment_roles(param)
-    roles_to_added = param["roles"].map(&:to_i)
-    param["users"].map(&:to_i).each do |uid|
-      user = User.find_by_id(uid)
-      next unless user
-      roles_to_added.each do |new_role|
-        user.roles << Role.create(user_id: user.id, user_role: new_role)
-      end
-    end
-  end
-
   def self.update_resource(param)
     id = param[:id]
     name = param[:name]

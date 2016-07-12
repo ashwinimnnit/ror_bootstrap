@@ -6,14 +6,6 @@ RSpec.describe NotificationsController, type: :controller do
     sign_in @created_user
   end
 
-  describe "GET #logged in user", user_sign_in: true do
-    let(:expected_response) { JSON.parse(response.body)["user"] }
-    it "returns a user id" do
-      get :logged_in_user
-      expect(expected_response).to be_instance_of(Fixnum)
-    end
-  end
-
   describe "Push a notification", user_sign_in: true do
     let(:expected_response) { JSON.parse(response.body) }
     let(:expected_status) { JSON.parse(expected_response["message"]) }
