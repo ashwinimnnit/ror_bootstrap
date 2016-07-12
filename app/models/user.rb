@@ -26,10 +26,14 @@ class User < ActiveRecord::Base
   has_many :posts,  dependent: :destroy
   has_many :member_role, dependent: :destroy
   has_many :roles, through: :member_role
+  has_many :msg_received, class_name: "Message", dependent: :destroy,
+                          foreign_key: "receiver_id"
+  has_many :msg_sends, class_name: "Message", dependent: :destroy,
+                       foreign_key: "sender_id"
   after_create :set_profile
-  has_many :receivers, class_name: "Notification", dependent: :destroy,
-                       foreign_key: "user_id"
-  has_many :senders, class_name: "Notification", foreign_key: "sender_id"
+  has_many :notification_received, class_name: "Notification", dependent: :destroy,
+                                   foreign_key: "user_id"
+  has_many :notification_sends, class_name: "Notification", foreign_key: "sender_id"
   # paperclip image upload gem method
   has_attached_file :avatar,
                     styles: { medium: "300x300>", thumb: "50x50>" },

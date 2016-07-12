@@ -11,16 +11,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 module ApplicationHelper
-  def get_roles_name(s = [])
-    arr = ""
-    s.each do |sid|
-      CONFIG.values.each do |i|
-        arr += "<div> #{i['name']} </div>" if i["id"].to_i == sid
-      end
-    end
-    arr.html_safe
-  end
-
   def broadcast(channel, &block)
     message = { channel: channel, data: capture(&block) }
     uri = URI.parse("http://localhost:9292/faye")
@@ -33,5 +23,25 @@ module ApplicationHelper
 
   def show_unread_notification(user)
     Notification.where("seen = false AND user_id = #{user}").count
+  end
+
+  def user_chat_history(user1, user2)
+    messages = Message.where("(receiver_id = ?  and sender_id = ?) or
+                              (receiver_id = ?  and sender_id = ?)",
+                             user1.id, user2.id, user2.id, user1.id
+                            )
+                      .order(created_at: "asc")
+    align_user_chat(messages, user2)
+  end
+
+  def align_user_chat(messages, sender)
+    s = ""
+    messages.each do |msg|
+      css_class = msg.sender_id == sender.id ? "show-chat" : "show-chat_"
+      s += "<div class = 'gc'>\
+           <span class = '#{css_class}'>\
+             #{msg.user_message}</span></div><br>"
+    end
+    s.html_safe
   end
 end
