@@ -38,6 +38,7 @@ class ProfilesController < ApplicationController
   end
 
   def update_profile_image
+    debugger
     id = params[:user][:attr].to_i
     user = User.find(id)
     attribute = { avatar: params[:user][:avatar] }

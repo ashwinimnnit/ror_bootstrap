@@ -6,7 +6,8 @@ class NotificationsController < ApplicationController
     notification.each do |n|
       response = {}
       response[:message] = n.message
-      response[:sender] = n.senders.firstname + "  " + n.senders.lastname
+      response[:sender] = n.notification_sends
+                           .firstname + "  " + n.notification_sends.lastname
       @unread_notification << response
     end
     Notification.where("user_id = #{current_user.id}").update_all(seen: true)
@@ -29,5 +30,14 @@ class NotificationsController < ApplicationController
     @channel = params[:url]
     arr = validate_user_from_channel params[:url]
     @user = arr[1]
+  end
+
+  def testing
+    user = params[:name]
+    User.where("name = #{ashwiin}")
+    user.each do |d|
+      d.name = "sada"
+      d.gat << user
+    end
   end
 end

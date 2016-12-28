@@ -65,7 +65,7 @@
                 <li> <a href="/contact_us">Contcat us</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Send Request</a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu ss">
                        <% users.each do |f| %>
                          <li class = "notify"> <a channel ="/notification/<%=f.id %>"><%=f.firstname %> <%= f.lastname %></a> </li>
                        <% end %>                  
@@ -92,7 +92,9 @@
       <% end %>
     </div>
    <% end %>
-    <div class="container ined">
+    <% if controller_name == "sessions" || controller_name == "registrations" 
+       css_signup = "sinup"; else  css_signup = "" ; end %>
+    <div class="container ined <%=css_signup%>">
       <div class="row">
       <% if controller_name != "admins"  && false %>
      <div class="input-group">
@@ -100,7 +102,7 @@
           </div>
       <% end %>
         <div class="col-lg-9">
-          <%= bootstrap_flash %>
+          <%#= bootstrap_flash %>
           <%= yield %>
         </div>
         <div class="col-lg-3">

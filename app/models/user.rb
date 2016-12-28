@@ -49,16 +49,15 @@ class User < ActiveRecord::Base
 
   def self.create_from_omniauth(params)
     fname, lname = split_names params
-    @user = User.new(email:  params["info"]["email"],
+    user = create(email:  params["info"]["email"],
                      firstname: fname,
                      lastname: lname,
                      avatar_file_name: "img.jpg",
                      password: params["info"]["email"],
                      confirmed_at: Time.now)
     # don"t send email to the user while signup with externa devise
-    @user.skip_confirmation!
-    @user.save
-    @user
+    user.skip_confirmation!
+    user
   end
 
   def self.split_names(param)

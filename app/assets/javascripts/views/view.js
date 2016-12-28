@@ -16,7 +16,7 @@ var VIEW = (function()
     
     AppendChat: function(chat, css = "show-chat", chatbox)
     { 
-     node = "<div class = 'gc'><span class = "+css+"> "+chat+" </span></div><br/>"
+     node = "<div class = 'gc'><span class = "+css+"> "+chat+" </span></div><br><br><br>"
      $("div[channel = '"+chatbox+"'] #message_display").append(node)
     },
 

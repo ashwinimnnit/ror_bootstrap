@@ -14,6 +14,7 @@ module Apis
     end
 
     def index
+      private_method_call
       response = Role.display_roles
       if response.count == 0
         existing_role = "No Roles found"

@@ -1,8 +1,0 @@
-module Apis
-  class WelcomeController < ApiController
-    def index
-      render :layout => false
-      render "api_guide/guide"
-    end
-  end
-end

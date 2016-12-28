@@ -32,7 +32,17 @@ float:left;
 width:100%
 
 }
+ .ss{
+ height: 975%;
+ overflow-y: auto;
+}
 
+.sinup{
+float: left;
+    margin-left: 200px;
+    position: relative;
+    top: 21px;
+}
 .cls-chat{
 cursor: pointer;
     float: right;
@@ -54,7 +64,6 @@ max-width: 105px;
 word-wrap: break-word;
 background-color: #C1C187;
     border-radius: 9px;
-    margin-left: 1%;
     padding: 4px 6px 3px 7px;
     position: relative;
     top: 5%
@@ -64,7 +73,6 @@ background-color: #C1C187;
 word-wrap: break-word;
 background-color: #a3a396;
     border-radius: 9px;
-    float:right;
     right: -138%;
     padding: 4px 6px 3px 7px;
     position: relative;
@@ -192,7 +200,8 @@ background-color: #d9dfe3;
     margin-left: 1%;
     padding: 10px 15px 12px 28px;
     position: fixed;
-
+    overflow-y: auto;
+    height: 70%;
 }
 
 .messlist{

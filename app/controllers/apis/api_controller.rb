@@ -15,6 +15,10 @@ module Apis
       params.delete("params")
     end
 
+    def private_method_call
+       p "----------------------------------private -----"
+    end
+ 
     def render_403(response)
       render json: {
         status: 403,

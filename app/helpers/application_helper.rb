@@ -40,7 +40,7 @@ module ApplicationHelper
       css_class = msg.sender_id == sender.id ? "show-chat" : "show-chat_"
       s += "<div class = 'gc'>\
            <span class = '#{css_class}'>\
-             #{msg.user_message}</span></div><br>"
+             #{msg.user_message}</span></div><br><br>"
     end
     s.html_safe
   end

@@ -44,7 +44,12 @@
 
   function AjaxUpdateImage(url,id) {
       var dataToSend = new FormData($('#'+id)[0]);
+      console.log("-----------------------------------------------")
+console.log(dataToSend)
+     
+
       var image = dataToSend.get('user[avatar]')
+console.log(image)
       $.ajax({
            type: "POST",
            url: url,
